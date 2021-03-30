@@ -8,3 +8,5 @@
 
 [komentorivi.txt](https://github.com/varvikko/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+
