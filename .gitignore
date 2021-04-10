@@ -3,7 +3,11 @@
 /laskarit/viikko2/unicafe/.coverage
 /laskarit/viikko2/unicafe/htmlcov
 
-.vscode/
-htmlcov/
-
+.vscode
+htmlcov
+__pycache__
 .coverage
+.pytest
+.pytest_cache
+*.py[codw]
+
