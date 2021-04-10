@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "texviper"
+version = "0.1.0"
+description = "LaTeX Editor"
+authors = ["Nuutti Varvikko <nuutti.varvikko@helsinki.com>"]
+license = "GPL"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+invoke = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.3"
+pylint = "^2.7.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
