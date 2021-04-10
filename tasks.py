@@ -15,3 +15,11 @@ def test(ctx):
 @task
 def lint(ctx):
     ctx.run('pylint src')
+
+@task
+def coverage_report(ctx):
+    ctx.run("coverage html")
+
+@task
+def clean(ctx):
+    ctx.run("rm -rf htmlcov .coverage")

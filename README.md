@@ -6,30 +6,54 @@
 
 [Työtuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
+## Asennus
+
+Riippuvuudet asennetaan komennolla
+
+```shell
+poetry install
+```
+
 ## Käyttö
 
-Sovellus käynnistetään seuraavalla komennolla:
+### Käynnistys
+
+Sovellus käynnistetään seuraavalla komennolla
 
 ```shell
 poetry run invoke start
 ```
 
-Testit voi suoritaa komennolla:
+### Testaus
+
+Testit voi suorittaa komennolla
 
 ```shell
 poetry run invoke test
 ```
 
-Testikattavuutta voi tutkia komennolla
-
-```shell
-poetry run coverage
-```
+### Testikattavuus
 
 Testikattavuusraportin voi luoda komennolla
 
 ```shell
-poetry run coverage-report
+poetry run invoke coverage-report
 ```
 
-Raportti generoidaan projektin juureen htmlcov-kansioon.
+Raportti generoidaan projektin juureen htmlcov-hakemistoon.
+
+### Lint
+
+Lintterin voi suorittaa komennolla
+
+```shell
+poetry run invoke lint
+```
+
+### Clean
+
+Generoidut raportit voi poistaa komennolla
+
+```shell
+poetry run invoke clean
+```
