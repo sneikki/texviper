@@ -10,11 +10,15 @@ def start_cli(ctx):
 
 @task
 def test(ctx):
-    pass
+    ctx.run('pytest src')
 
 @task
 def lint(ctx):
     ctx.run('pylint src')
+
+@task
+def reformat(ctx):
+    ctx.run('autopep8 --in-place --recursive src')
 
 @task
 def coverage_report(ctx):
