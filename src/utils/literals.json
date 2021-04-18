@@ -1,0 +1,10 @@
+{
+    "permission_denied": "Permission denied",
+    "dir_exists": "Directory exists",
+    "project_creation_failed": "Failed to create project",
+    "project_already_exists": "Project already exists",
+    "project_created": "Created new project",
+    "database_connection_failed": "Failed to establish database connection",
+    "database_creation_failed": "Failed to open database file",
+    "default_config": "Failed to open config file. Using default config"
+}

@@ -1,23 +1,20 @@
 import sys
 
-from controllers.project_controller import project_controller
-from stores.project_store import CreateProjectError
+from app.cli_application import CliApplication
+from app.gui_application import GuiApplication
 
-def main(args):
-    if '--cli' in args[1:]:
-        print("Running cli")
+def get_mode(param):
+    if param == '--cli':
+        return 'cli'
     else:
-        print("Running gui")
-
-    path = input("Project location: ")
-    name = input("Project name: ")
-
-    try:
-        project_controller.create_project(name, path)
-    except CreateProjectError as e:
-        print("Unable to create project: " + str(e))
-    else:
-        print("Created project " + name + " at " + path)
+        return 'gui'
 
 if __name__ == '__main__':
-    main(sys.argv)
+    mode = get_mode(sys.argv[1])
+    
+    if mode == 'cli':
+        app = CliApplication()
+    else:
+        app = GuiApplication()
+
+    app.run()
