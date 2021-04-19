@@ -7,13 +7,15 @@ from utils.literal import literals
 from utils.exceptions import DatabaseConnectionError
 
 class Database:
-    def connect(self):
+    def connect(self, path=None):
         self.db_path = Path(config.get_value('db_path')).expanduser()
-        self.db_name = config.get_value('db_name')
+        db_name = config.get_value('db_name')
         
+        self.full_path = path or self.db_path / db_name
+
         try:
             self.db_path.mkdir(parents=True,exist_ok=True)
-            self.connection = sqlite3.connect(self.db_path / self.db_name)
+            self.connection = sqlite3.connect(self.full_path)
             self.cursor = self.connection.cursor()
 
             with open('src/db/init_db.sql') as init_db:
@@ -21,7 +23,7 @@ class Database:
 
             self.cursor.executescript(init_db_src)
         except OperationalError as err:
-            raise DatabaseConnectionError(f"{literals['database_connection_failed']}: {self.db_path / self.db_name}") from err
+            raise DatabaseConnectionError(f"{literals['database_connection_failed']}: {self.full_path}") from err
 
     def close(self):
         if self.connection:
