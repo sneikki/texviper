@@ -75,6 +75,6 @@ class ProjectController:
             project_id (string): id of the project to remove
         """
 
-        project_store.delete_project(project_id)
+        project_store.delete_one(project_id)
 
 project_controller = ProjectController()

@@ -61,17 +61,32 @@ class ProjectStore:
 
     def delete_one(self, project_id):
 
+        project = self.find_by_id(project_id)
+
         query = f"""
             delete from Projects
-            where id="{project_id}""
+            where project_id="{project_id}"
         """
-
+        
         database.execute(query)
+        database.commit()
+
+        if project:
+            self._destruct_project(project[2], project[1])
 
     def delete_many(self, project_ids):
         pass
 
+    def find_by_id(self, project_id, fields=None):
+        query = f"""
+            select {database.concatenate_fields(fields)} from Projects
+            where project_id='{project_id}'
+        """
+        database.execute(query)
+        return database.fetch_one()
+
     def find_one(self, conditions, fields=None):
+
         """ Looks for a single project by given conditions
             and returns appropriate fields.
 
@@ -87,7 +102,7 @@ class ProjectStore:
             select {database.concatenate_fields(fields)} from Projects
             where {conditions}
         """
-
+        
         database.execute(query)
         return database.fetch_one()
 
