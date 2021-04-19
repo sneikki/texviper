@@ -13,7 +13,7 @@ class ProjectController:
             name (string): string that represents name of the project
             path (string): string that represents path of the project
         """
-        
+
         if project_store.exists(name):
             raise ProjectExistsError
         project = Project(name, path)
@@ -28,7 +28,7 @@ class ProjectController:
         """
 
         names = map(lambda name: name[0], project_store.find_all(['name']))
-        return names
+        return list(names)
 
     def get_projects(self):
         """ Returns list of all projects containing all fields
@@ -51,7 +51,7 @@ class ProjectController:
             Project: project or None if nothing was found
         """
 
-        project = project_store.find_one([ ('project_id', project_id) ])
+        project = project_store.find_one(f"project_id = '{project_id}'")
         return project
 
     def get_project_by_name(self, name):
@@ -65,7 +65,7 @@ class ProjectController:
             Project: project or None if nothing was found
         """
 
-        project = project_store.find_one(['name'], [ ('name', name) ])
+        project = project_store.find_one(f"name = '{name}'")
         return project
 
     def remove_project(self, project_id):

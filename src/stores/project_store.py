@@ -59,13 +59,19 @@ class ProjectStore:
         database.execute(query)
         return len(database.fetch_all()) > 0
 
-    def delete_one(self):
+    def delete_one(self, project_id):
+
+        query = f"""
+            delete from Projects
+            where id="{project_id}""
+        """
+
+        database.execute(query)
+
+    def delete_many(self, project_ids):
         pass
 
-    def delete_many(self):
-        pass
-
-    def find_one(self, fields, conditions):
+    def find_one(self, conditions, fields=None):
         """ Looks for a single project by given conditions
             and returns appropriate fields.
 
@@ -79,13 +85,13 @@ class ProjectStore:
 
         query = f"""
             select {database.concatenate_fields(fields)} from Projects
-            where {database.construct_condition(conditions)}
+            where {conditions}
         """
 
         database.execute(query)
         return database.fetch_one()
 
-    def find_all(self, fields):
+    def find_all(self, fields=None):
         """ Fetches all projects from database and returns
             appropriate fields.
 
@@ -119,7 +125,7 @@ class ProjectStore:
         query = f"""
             insert into Projects (project_id, name, path, last_modified)
             values ("{project.project_id}", "{project.name}",
-            "{project.path}", "{project.last_modified}")
+            "{Path(project.path).expanduser()}", "{project.last_modified}")
         """
 
         database.execute(query)
@@ -170,5 +176,20 @@ class ProjectStore:
 
         file_system.create_file(full_path)
         file_system.write(full_path, config_str)
+
+    def _destruct_project(self, path, name):
+        """ Removes all project resources from file system
+
+        Args:
+            path (Path): Project path
+            name (string): Project name
+        """
+
+        full_path = Path(path) / name
+
+        try:
+            file_system.remove_directory(full_path)
+        except (FileNotFoundError, PermissionError):
+            pass
 
 project_store = ProjectStore()

@@ -6,18 +6,15 @@ from utils.literal import literals
 
 CONFIG_PATH = '~/.texviper/config.json'
 
-class ConfigError(Exception):
-    pass
-
 class Config:
     def __init__(self):
         self.config_values = dict()
     
-    def create_project_config(self, project):
+    def create_project_config(self, project_id, name):
         project_config = dict()
 
-        project_config['name'] = project.name
-        project_config['id'] = project.project_id
+        project_config['name'] = name
+        project_config['project_id'] = project_id
         
         return dumps(project_config)
 

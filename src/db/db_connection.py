@@ -4,9 +4,7 @@ from pathlib import Path
 
 from config.config import config
 from utils.literal import literals
-
-class DatabaseConnectionError(Exception):
-    pass
+from utils.exceptions import DatabaseConnectionError
 
 class Database:
     def connect(self):
@@ -35,6 +33,9 @@ class Database:
     def execute_script(self, script):
         self.cursor.executescript(script)
 
+    def begin(self):
+        self.cursor.execute('begin')
+
     def commit(self):
         self.connection.commit()
 
@@ -46,5 +47,11 @@ class Database:
 
     def fetch_one(self):
         return self.cursor.fetchone()
+
+    def concatenate_fields(self, fields):
+        return ','.join(fields) if fields else '*'
+
+    def construct_condition(self, conditions):
+        pass
 
 database = Database()
