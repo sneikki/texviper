@@ -4,6 +4,9 @@ class FileSystem:
     def directory_exists(self, path):
         return path.exists()
 
+    def file_exists(self, path):
+        return path.exists()
+
     def directory_empty(self, path):
         return next(path.iterdir(), None) is None
 
@@ -18,5 +21,8 @@ class FileSystem:
 
     def write(self, path, text):
         path.write_text(text)
+
+    def remove_directory(self, path):
+        shutil.rmtree(path)
 
 file_system = FileSystem()

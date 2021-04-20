@@ -2,65 +2,100 @@ from pathlib import Path
 from uuid import uuid4 as uuid
 import json
 from pyfakefs import fake_filesystem_unittest
+from datetime import datetime
 
 from stores.project_store import (
-    project_store, CreateProjectError
+    project_store
 )
 from models.project import Project
+from config.config import config
+from db.db_connection import database
+from utils.filesystem import file_system
 
 # todo: move initialization to setUp
 
-
 class ProjectStoreTest(fake_filesystem_unittest.TestCase):
+    #
+    #   Setup
+    #
+    
+    @classmethod
+    def setUpClass(cls):
+        config.open_config('src/config/default_config.json')
+        print(config.config_values)
+
     def setUp(self):
+        # IMPORTANT: initialization must be done in this order,
+        # otherwise database tries to look for init_db.sql in
+        # the fake file system
+        database.connect(':memory:')
         self.setUpPyfakefs()
 
-    def test_create_project(self):
+    def tearDown(self):
+        database.close()
+
+    #
+    #   Tests
+    #
+
+    def test_create_initializes_resources(self):
         project = Project('test_project', '.')
-        project_store.create_project(project)
-
-        self.assertTrue(Path('test_project').exists())
-
-    def test_create_project_fails_with_existing_directory(self):
-        project = Project('existing_project', '.')
-        project_store.create_project(project)
-
-        self.assertRaises(CreateProjectError,
-                          project_store.create_project, project)
-
-    def test_create_project_does_not_create_config_to_existing_directory(self):
-        Path('test_project').mkdir()
-
-        project = Project('test_project', '.')
-
-        try:
-            project_store.create_project(project)
-        except CreateProjectError:
-            pass
-
-        self.assertFalse(Path('test_project/projectrc.json').exists())
-
-    def test_create_project_fails_without_permission(self):
-        Path('000_dir').mkdir(0o000)
-
-        project = Project('project', '000_dir')
-        self.assertRaises(CreateProjectError,
-                          project_store.create_project, project)
-
-    def test_create_project_initializes_project(self):
-        project = Project('test_project', '.')
-        project_store.create_project(project)
+        project_store.create(project)
 
         self.assertTrue(Path('test_project/projectrc.json').exists())
 
-    def test_init_project_initializes_with_correct_values(self):
+    def test_create_inserts_to_database(self):
+        project = Project('test_project', '.')
+        project_store.create(project)
+
+        database.execute("""select * from Projects where name='test_project'""")
+        res = database.fetch_one()
+
+        self.assertEqual(len(res), 4)
+
+    def test_create_inserts_correct_values_to_database(self):
+        project_id = str(uuid())
+        name = 'test_project'
+        path = '.'
+        timestamp = str(datetime.now())
+        project = Project(name, path, project_id, timestamp)
+        project_store.create(project)
+
+        database.execute("""select * from Projects where name='test_project'""")
+        res = database.fetch_one()
+        print(res)
+        self.assertEqual(res[0], project_id)
+        self.assertEqual(res[1], name)
+        self.assertEqual(res[2], path)
+        self.assertEqual(res[3], timestamp)
+
+    def test_create_fails_with_nonempty_path(self):
+        file_system.create_directory(Path('test_project'))
+        file_system.create_file(Path('test_project/file'))
+
+        project = Project('test_project', '.')
+
+        self.assertRaises(FileExistsError,
+            project_store.create, project)
+
+        self.assertFalse(file_system.file_exists(Path('test_project/projectrc.json')))
+
+    def test_create_fails_with_bad_permission(self):
+        Path('permission_000').mkdir(0o000)
+
+        project = Project('project', 'permission_000')
+        self.assertRaises(PermissionError,
+            project_store.create, project)
+
+    def test_create_initializes_project_correctly(self):
         project_id = str(uuid())
         name = 'test_project'
         path = '.'
 
         project = Project(name, path, project_id)
-        project_store.create_project(project)
+        project_store.create(project)
 
-        rc_config = json.loads(Path('test_project/projectrc.json').read_text())
-        self.assertEqual(rc_config['id'], project_id)
-        self.assertEqual(rc_config['name'], name)
+        conf = json.loads(Path('test_project/projectrc.json').read_text())
+        self.assertEqual(conf['project_id'], project_id)
+        self.assertEqual(conf['name'], name)
+

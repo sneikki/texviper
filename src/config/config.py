@@ -24,8 +24,8 @@ class Config:
     def set_value(self, name, value):
         pass
 
-    def open_config(self):
-        path = Path(CONFIG_PATH).expanduser()
+    def open_config(self, cfg_path=None):
+        path = Path(cfg_path or CONFIG_PATH).expanduser()
         
         try:
             if not path.exists():

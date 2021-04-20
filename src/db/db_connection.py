@@ -11,7 +11,7 @@ class Database:
         self.db_path = Path(config.get_value('db_path')).expanduser()
         db_name = config.get_value('db_name')
         
-        self.full_path = path or self.db_path / db_name
+        self.full_path = path or (self.db_path / db_name)
 
         try:
             self.db_path.mkdir(parents=True,exist_ok=True)

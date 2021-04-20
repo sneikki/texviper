@@ -1,50 +1,22 @@
 from controllers.project_controller import project_controller
-from stores.project_store           import CreateProjectError
-from utils.literal                  import literals
+from utils.exceptions import DirectoryNotEmptyError, ProjectExistsError
+from sqlite3 import IntegrityError
 
 def run():
-    while True:
-        projects = map(lambda p: f"""* {p}""", project_controller.get_project_names())
+    projects = project_controller.get_project_names()
+    print("\n".join(projects))
 
-        print_projects(projects)
+    path = "~/test"
+    name = input("Enter project name: ")
 
-        print(
-            """Options:
-1. Create new project
-2. Remove existing project
-3. Quit"""
-        )
-
-        action = int(input())
-        if action == 1:
-            create_project()
-        elif action == 2:
-            remove_project()
-        elif action == 3:
-            break
-
-def print_projects(projects):
-    project_list = '\n'.join(projects)
-    print(
-        f"""********
-Projects
-********
-
-{project_list}
-"""
-    )
-
-def create_project():
-    name = input("Project name: ")
-    path = input("Project path: ")
     try:
-        project_controller.create_project(name, path)
-    except CreateProjectError as e:
-        print(f"{literals['project_creation_failed']}: {e}")
-    else:
-        print(f"{literals['project_created']} {name}")
-
-def remove_project():
-    name = input("Project name: ")
-
-    project_controller.remove_project(name)
+        project_controller.remove_project(name)
+        # project_controller.create_project(name, path)
+    except PermissionError:
+        print("Unable to create project: insufficient permissions")
+    except IntegrityError:
+        print("Unable to create project: invalid data")
+    except DirectoryNotEmptyError:
+        print("Unable to create project: directory not empty")
+    except ProjectExistsError:
+        print(f"Unable to create project: project {name} already exists")

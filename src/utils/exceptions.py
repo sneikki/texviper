@@ -1,4 +1,4 @@
-class DirectoryExistsError(Exception):
+class DirectoryNotEmptyError(Exception):
     pass
 
 class DatabaseConnectionError(Exception):

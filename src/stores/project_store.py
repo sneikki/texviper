@@ -5,7 +5,7 @@ from sqlite3 import (
 
 from db.db_connection import database
 from config.config import config
-from utils.exceptions import DirectoryExistsError
+from utils.exceptions import DirectoryNotEmptyError
 from utils.filesystem import file_system
 
 class ProjectStore:
@@ -33,7 +33,7 @@ class ProjectStore:
             self._write(project)
         except (
             PermissionError,
-            DirectoryExistsError,
+            FileExistsError,
             IntegrityError,
             OperationalError
         ) as err:
@@ -114,7 +114,7 @@ class ProjectStore:
             fields (list): List of fields to be queried
 
         Returns:
-            list: list of projects or empty list if nothing was found 
+            list: list of projects or empty list if nothing was found
 
         """
 
@@ -169,12 +169,12 @@ class ProjectStore:
             path (Path): Project path
 
         Raises:
-            DirectoryExistsError: if existing directory is not empty
+            FileExistsError: if existing directory is not empty
         """
 
         if file_system.directory_exists(path) and not file_system.directory_empty(path):
-                raise DirectoryExistsError()
-        
+            raise FileExistsError()
+
         file_system.create_directory(path)
 
     def _initialize_config(self, path, project_id, name):

@@ -1,5 +1,5 @@
 from db.db_connection import database, DatabaseConnectionError
-from config.config import config, ConfigError
+from config.config import config
 
 class Application:
     def __init__(self):
