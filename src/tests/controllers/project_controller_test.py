@@ -53,5 +53,5 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
         project_id = database.fetch_one()[0]
 
         self.assertEqual(project_id,
-            project_controller.get_project_by_id(project_id)[0])
+            project_controller.get_project_by_id(project_id).project_id)
 

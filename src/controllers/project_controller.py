@@ -27,7 +27,7 @@ class ProjectController:
             list: list of names of all projects
         """
 
-        names = map(lambda name: name[0], project_store.find_all(['name']))
+        names = list(map(lambda p: p.name, project_store.find_all()))
         return list(names)
 
     def get_projects(self):

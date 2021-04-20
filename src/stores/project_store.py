@@ -3,6 +3,7 @@ from sqlite3 import (
     IntegrityError, OperationalError
 )
 
+from models.project import Project
 from db.db_connection import database
 from config.config import config
 from utils.exceptions import DirectoryNotEmptyError
@@ -85,13 +86,11 @@ class ProjectStore:
         database.execute(query)
         return database.fetch_one()
 
-    def find_one(self, conditions, fields=None):
+    def find_one(self, conditions):
 
         """ Looks for a single project by given conditions
-            and returns appropriate fields.
 
         Args:
-            fields (list): List of fields to be queried
             conditions (list): List of conditions for limiting the query
         
         Returns:
@@ -99,19 +98,17 @@ class ProjectStore:
         """
 
         query = f"""
-            select {database.concatenate_fields(fields)} from Projects
+            select * from Projects
             where {conditions}
         """
         
         database.execute(query)
-        return database.fetch_one()
+        project = database.fetch_one()
+        return Project(project[1], project[2], project[0], project[3]) if project else None
 
-    def find_all(self, fields=None):
+    def find_all(self):
         """ Fetches all projects from database and returns
             appropriate fields.
-
-        Args:
-            fields (list): List of fields to be queried
 
         Returns:
             list: list of projects or empty list if nothing was found
@@ -119,11 +116,16 @@ class ProjectStore:
         """
 
         query = f"""
-            select {database.concatenate_fields(fields)} from Projects
+            select * from Projects
         """
 
         database.execute(query)
-        return database.fetch_all()
+        projects = database.fetch_all()
+
+        return list(map(
+            lambda p: Project(p[1], p[2], p[0], p[3]),
+            projects
+        )) if projects else []
 
     #
     #   Private
