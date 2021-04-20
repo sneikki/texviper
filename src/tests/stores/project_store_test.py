@@ -1,8 +1,8 @@
 from pathlib import Path
 from uuid import uuid4 as uuid
-import json
-from pyfakefs import fake_filesystem_unittest
+from json import loads
 from datetime import datetime
+from pyfakefs import fake_filesystem_unittest
 
 from stores.project_store import (
     project_store
@@ -22,7 +22,6 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         config.open_config('src/config/default_config.json')
-        print(config.config_values)
 
     def setUp(self):
         # IMPORTANT: initialization must be done in this order,
@@ -95,7 +94,24 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
         project = Project(name, path, project_id)
         project_store.create(project)
 
-        conf = json.loads(Path('test_project/projectrc.json').read_text())
+        conf = loads(Path('test_project/projectrc.json').read_text())
         self.assertEqual(conf['project_id'], project_id)
         self.assertEqual(conf['name'], name)
 
+    def test_delete_removes_database_record(self):
+        project = Project('test_project', '.')
+        project_store.create(project)
+
+        project_store.delete_one(project.project_id)
+        database.execute(f"""select * from Projects where project_id='{project.project_id}'""")
+        self.assertIsNone(database.fetch_one())
+
+    def test_delete_removes_project_directory(self):
+        project = Project('test_project', '.')
+        project_store.create(project)
+
+        project_store.delete_one(project.project_id)
+        self.assertFalse(file_system.directory_exists(Path('test_project')))
+
+    def test_deleting_nonexising_does_not_raise_error(self):
+        project_store.delete_one("94039403")
