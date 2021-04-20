@@ -4,6 +4,8 @@
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
+[Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
+
 [Työtuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 ## Asennus
