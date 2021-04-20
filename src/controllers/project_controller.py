@@ -1,4 +1,5 @@
 from models.project import Project
+from models.resource import Resource
 from stores.project_store import project_store
 from utils.exceptions import ProjectExistsError
 
@@ -19,6 +20,14 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
+
+    def add_resource(self, name, path, resource_type, project_id): # _todo: error handling
+        resource = Resource(name, path, resource_type)
+
+        project_store.add_resource(resource, project_id)
+
+    def remove_resource(self, resource_id, project_id):
+        project_store.remove_resource(resource_id, project_id)
 
     def get_project_names(self):
         """ Returns list of names of all projects

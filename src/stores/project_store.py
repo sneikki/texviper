@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from sqlite3 import (
     IntegrityError, OperationalError
@@ -8,6 +9,7 @@ from db.db_connection import database
 from config.config import config
 from utils.exceptions import DirectoryNotEmptyError
 from utils.filesystem import file_system
+from stores.resource_store import resource_store
 
 class ProjectStore:
     #
@@ -76,6 +78,36 @@ class ProjectStore:
             self._destruct_project(project[2], project[1])
 
     def delete_many(self, project_ids):
+        pass
+
+    def open_config(self, project_id):
+        project = self.find_one(f"""project_id='{project_id}'""")
+        
+        if project:
+            path = Path(project.path) / project.name / 'projectrc.json'
+            with open(path) as config_file:
+                project_config = json.load(config_file)
+                return project_config
+        else:
+            pass
+
+    def save_config(self, project_config):
+        path = Path(self.find_one(f"""name='{project_config['name']}'""").path)
+        name = project_config['name']
+
+        with open(path / name / 'projectrc.json', 'w') as out_file:
+            json.dump(project_config, out_file)
+
+    def add_resource(self, resource, project_id):
+        project_config = self.open_config(project_id)
+        # project_config = project_config['resources'] or []
+        if not 'resources' in project_config:
+            project_config['resources'] = []
+        project_config['resources'].append(
+            resource_store.serialize(resource))
+        self.save_config(project_config)
+
+    def remove_resource(self, resource_id, project_id):
         pass
 
     def find_by_id(self, project_id, fields=None):

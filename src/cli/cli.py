@@ -3,20 +3,31 @@ from utils.exceptions import DirectoryNotEmptyError, ProjectExistsError
 from sqlite3 import IntegrityError
 
 def run():
-    projects = project_controller.get_project_names()
-    print("\n".join(projects))
 
-    path = "~/test"
-    name = input("Enter project name: ")
+    while True:
+        print('\n'.join(project_controller.get_project_names()))
 
-    try:
-        project_controller.remove_project(name)
-        # project_controller.create_project(name, path)
-    except PermissionError:
-        print("Unable to create project: insufficient permissions")
-    except IntegrityError:
-        print("Unable to create project: invalid data")
-    except DirectoryNotEmptyError:
-        print("Unable to create project: directory not empty")
-    except ProjectExistsError:
-        print(f"Unable to create project: project {name} already exists")
+        print('1. Create new project\n2. Remove existing project\n3. Add resource to project\n4. Quit')
+        choice = input()
+
+        if choice == "1":
+            name = input('Project name: ')
+            path = input('Project location:')
+
+            project_controller.create_project(name, path)
+        elif choice == "2":
+            name = input('Project name: ')
+
+            project = project_controller.get_project_by_name(name)
+            project_controller.remove_project(project.project_id)
+        elif choice == "3":
+            project_name = input("Project name: ")
+            name = input("Resource name: ")
+            path = input("Resource location in project: ")
+            resource_type = input("Resource type: ")
+
+            project = project_controller.get_project_by_name(project_name)
+
+            project_controller.add_resource(name, path, resource_type, project.project_id)
+        else:
+            break
