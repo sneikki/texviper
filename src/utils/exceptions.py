@@ -6,3 +6,6 @@ class DatabaseConnectionError(Exception):
 
 class ProjectExistsError(Exception):
     pass
+
+class InvalidValueError(Exception):
+    pass

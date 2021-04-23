@@ -1,7 +1,7 @@
 from models.project import Project
 from models.resource import Resource
 from stores.project_store import project_store
-from utils.exceptions import ProjectExistsError
+from utils.exceptions import ProjectExistsError, InvalidValueError
 
 class ProjectController:
     """ Handles logical operations for projects
@@ -14,6 +14,11 @@ class ProjectController:
             name (string): string that represents name of the project
             path (string): string that represents path of the project
         """
+
+        if not name:
+            raise InvalidValueError('Invalid name')
+        if not path:
+            raise InvalidValueError('Invalid path')
 
         if project_store.exists(name):
             raise ProjectExistsError

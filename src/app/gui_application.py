@@ -54,3 +54,4 @@ class GuiApplication(Application):
 
     def add_view(self, name, view):
         self.engine.rootContext().setContextProperty(name, view)
+        view.engine = self.engine

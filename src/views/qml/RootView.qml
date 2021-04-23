@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 ApplicationWindow {
+    id: window
     width: 960
     height: 640
     minimumWidth: 640
@@ -9,4 +10,8 @@ ApplicationWindow {
     visible: true
 
     title: qsTr("hello world")
+
+    HomeView {
+
+    }
 }
