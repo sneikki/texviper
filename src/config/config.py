@@ -9,13 +9,13 @@ CONFIG_PATH = '~/.texviper/config.json'
 class Config:
     def __init__(self):
         self.config_values = dict()
-    
+
     def create_project_config(self, project_id, name):
         project_config = dict()
 
         project_config['name'] = name
         project_config['project_id'] = project_id
-        
+
         return dumps(project_config)
 
     def get_value(self, name):
@@ -26,7 +26,7 @@ class Config:
 
     def open_config(self, cfg_path=None):
         path = Path(cfg_path or CONFIG_PATH).expanduser()
-        
+
         try:
             if not path.exists():
                 # Copy config file to config path
@@ -39,6 +39,5 @@ class Config:
 
             with open('src/config/default_config.json') as config_file:
                 self.config_values = load(config_file)
-        
 
 config = Config()

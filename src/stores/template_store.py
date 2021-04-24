@@ -50,7 +50,7 @@ class TemplateStore:
 
     def exists(self, name):
         query = f"""
-            select resource_id from Templates
+            select template_id from Templates
             where name='{name}'
         """
 
