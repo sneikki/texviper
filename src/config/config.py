@@ -3,6 +3,7 @@ from pathlib import Path
 from shutil import copyfile
 
 from utils.literal import literals
+from utils.filesystem import file_system
 
 CONFIG_PATH = '~/.texviper/config.json'
 
@@ -30,6 +31,7 @@ class Config:
         try:
             if not path.exists():
                 # Copy config file to config path
+                file_system.create_directory(path)
                 copyfile('src/config/default_config.json', path)
 
             with open(path) as config_file:

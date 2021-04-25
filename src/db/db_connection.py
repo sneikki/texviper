@@ -15,7 +15,7 @@ class Database:
 
         try:
             self.db_path.mkdir(parents=True,exist_ok=True)
-            self.connection = sqlite3.connect(self.full_path)
+            self.connection = sqlite3.connect(str(self.full_path))
             self.cursor = self.connection.cursor()
 
             with open('src/db/init_db.sql') as init_db:
