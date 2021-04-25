@@ -25,4 +25,7 @@ class FileSystem:
     def remove_directory(self, path):
         shutil.rmtree(path)
 
+    def remove_file(self, path):
+        path.unlink()
+
 file_system = FileSystem()

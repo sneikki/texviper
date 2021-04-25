@@ -31,7 +31,7 @@ class TemplateStore:
 
     def delete_one(self, template_id):
 
-        # template = self.find_by_id(template_id)
+        template = self.find_by_id(template_id)
 
         query = f"""
             delete from Templates
@@ -41,12 +41,19 @@ class TemplateStore:
         database.execute(query)
         database.commit()
 
+        # try:
+        file_system.remove_file(Path(template.path).expanduser() / template.filename)
+
     def read(self, template_id):
         template = self.find_by_id(template_id)
 
         if template:
             full_path = Path(template.path).expanduser() / template.filename
             return full_path.read_text()
+
+    def write(self, template_id, source):
+        template = self.find_by_id(template_id)
+        self._write(template, source)
 
     def exists(self, name):
         query = f"""

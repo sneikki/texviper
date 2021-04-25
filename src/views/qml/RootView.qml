@@ -8,8 +8,9 @@ ApplicationWindow {
     width: 960
     height: 640
     minimumWidth: 640
-    minimumHeight: 480
+    minimumHeight: 540
     visible: true
+    color: "white"
 
     title: qsTr("hello world")
 
@@ -30,7 +31,7 @@ ApplicationWindow {
 
             Rectangle {
                 id: home_btn
-                width: window.width / 3
+                width: window.width / 4
                 height: 30
                 color: (window.active === 0) ? "#189648" : "#d2d2d2"
 
@@ -56,7 +57,7 @@ ApplicationWindow {
 
             Rectangle {
                 id: project_btn
-                width: window.width / 3
+                width: window.width / 4
                 height: 30
                 color: (window.active === 1) ? "#189648" : "#d2d2d2"
 
@@ -81,7 +82,7 @@ ApplicationWindow {
 
             Rectangle {
                 id: settings_btn
-                width: window.width / 3
+                width: window.width / 4
                 height: 30
                 color: (window.active === 2) ? "#189648" : "#d2d2d2"
 
@@ -100,6 +101,30 @@ ApplicationWindow {
                     onClicked: {
                         windowsLayout.currentIndex = 2
                         window.active = 2
+                    }
+                }
+            }
+
+            Rectangle {
+                id: template_btn
+                width: window.width / 4
+                height: 30
+                color: (window.active === 3) ? "#189648" : "#d2d2d2"
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: 5
+                    color: (window.active === 3) ? "#ffffff" : "#5b5b5b"
+                    text: qsTr("Templates")
+                    font.pixelSize: 16
+                    font.capitalization: Font.AllUppercase
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        windowsLayout.currentIndex = 3
+                        window.active = 3
                     }
                 }
             }
@@ -125,6 +150,10 @@ ApplicationWindow {
 
         SettingsView {
 
+        }
+
+        TemplateView {
+            
         }
     }
 }

@@ -11,6 +11,7 @@ from views.root_view import RootView
 from views.home_view import HomeView
 from views.project_view import ProjectView
 from views.settings_view import SettingsView
+from views.template_view import TemplateView
 
 class GuiApplication(Application):
     def __init__(self):
@@ -38,6 +39,8 @@ class GuiApplication(Application):
         self.add_view('settings_view', settings_view)
         project_view = ProjectView()
         self.add_view('project_view', project_view)
+        template_view = TemplateView(self.engine)
+        self.add_view('template_view', template_view)
 
         self.app.exec_()
 
