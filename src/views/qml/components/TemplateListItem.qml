@@ -5,14 +5,13 @@ Row {
     property var template_id
     property var name
     spacing: 10
-    width: parent.width
 
     Text {
         id: templateName
         
         width: 200
-        text: name
-        anchors.verticalCenter: parent.verticalCenter
+        text: name || ""
+        anchors.verticalCenter: parent ? parent.verticalCenter : undefined
     }
 
     Button {

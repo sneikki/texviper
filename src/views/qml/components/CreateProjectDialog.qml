@@ -5,15 +5,6 @@ Rectangle {
     color: 'white'
 
     Item {
-        anchors.left: parent
-        anchors.leftMargin: 20
-        anchors.right: parent
-        anchors.rightMargin: 20
-        anchors.top: parent
-        anchors.topMargin: 20
-        anchors.bottom: parent
-        anchors.bottomMargin: 20
-
         Column {
             width: 360
             spacing: 20

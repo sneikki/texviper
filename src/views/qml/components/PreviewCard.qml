@@ -21,10 +21,9 @@ Rectangle {
 
         Rectangle {
             x: 0
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
+            y: 150
             width: parent.width
-            height: 65
+            height: 50
             color: '#eeeeee'
         }
     }
@@ -34,7 +33,7 @@ Rectangle {
         y: 210
         width: 184
         height: 15
-        text: name
+        text: name || ""
         elide: Text.ElideRight
         font.pixelSize: 12
     }
@@ -45,7 +44,7 @@ Rectangle {
         width: 184
         height: 15
         color: '#a2a2a2'
-        text: modified
+        text: modified || ""
         elide: Text.ElideRight
         font.pixelSize: 12
     }

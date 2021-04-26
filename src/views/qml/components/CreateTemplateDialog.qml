@@ -2,15 +2,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Item {
-    anchors.left: parent
-    anchors.leftMargin: 20
-    anchors.right: parent
-    anchors.rightMargin: 20
-    anchors.top: parent
-    anchors.topMargin: 20
-    anchors.bottom: parent
-    anchors.bottomMargin: 20
-
     Column {
         width: 360
         spacing: 20
