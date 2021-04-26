@@ -53,7 +53,4 @@ class Database:
     def concatenate_fields(self, fields):
         return ','.join(fields) if fields else '*'
 
-    def construct_condition(self, conditions):
-        pass
-
 database = Database()
