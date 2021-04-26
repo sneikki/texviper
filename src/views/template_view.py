@@ -6,6 +6,7 @@ from views.view import View
 from controllers.template_controller import template_controller
 from stores.template_store import template_store
 from utils.exceptions import InvalidValueError
+from config.config import config
 
 class TemplateView(View):
     def __init__(self, engine):
@@ -66,3 +67,7 @@ class TemplateView(View):
     @Slot(str)
     def save_clicked(self, source):
         template_store.write(self.current, source)
+
+    @Slot(result=str)
+    def get_default_path(self):
+        return config.get_value('default_template_path')

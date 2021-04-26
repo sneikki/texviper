@@ -8,6 +8,7 @@ from controllers.project_controller import project_controller
 from utils.exceptions import (
     DirectoryNotEmptyError, InvalidValueError, ProjectExistsError
 )
+from config.config import config
 
 class HomeView(View):
     def __init__(self, engine):
@@ -55,3 +56,8 @@ class HomeView(View):
     @Slot()
     def import_project_clicked(self):
         print('import project')
+
+    @Slot(result=str)
+    def get_default_path(self):
+        return config.get_value('default_project_path')
+        

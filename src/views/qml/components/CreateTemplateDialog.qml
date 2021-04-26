@@ -30,6 +30,7 @@ Item {
                 id: pathField
                 width: 250
                 placeholderText: 'Path'
+                text: template_view ? template_view.get_default_path() : ''
             }
             Button {
                 width: 100

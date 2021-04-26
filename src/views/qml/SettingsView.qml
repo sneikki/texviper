@@ -37,6 +37,7 @@ Item {
                     width: 200
                 }
             }
+
             SettingsEntry {
                 entryName: 'Database name'
 
@@ -45,6 +46,25 @@ Item {
                     width: 200
                 }
             }
+
+            SettingsEntry {
+                entryName: 'Default project location'
+
+                TextField {
+                    objectName: 'projectLocation'
+                    width: 200
+                }
+            }
+
+            SettingsEntry {
+                entryName: 'Default template location'
+
+                TextField {
+                    objectName: 'templateLocation'
+                    width: 200
+                }
+            }
+
             SettingsEntry {
                 entryName: 'Accent color'
 
@@ -53,6 +73,7 @@ Item {
                     width: 200
                 }
             }
+
             SettingsEntry {
                 entryName: 'Editor font'
 

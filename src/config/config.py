@@ -31,7 +31,7 @@ class Config:
         path = Path(cfg_path or CONFIG_PATH).expanduser()
 
         try:
-            if not path.exists():
+            if not (path / CONFIG_NAME).exists():
                 # Copy config file to config path
                 file_system.create_directory(path)
                 copyfile('src/config/default_config.json', path / CONFIG_NAME)

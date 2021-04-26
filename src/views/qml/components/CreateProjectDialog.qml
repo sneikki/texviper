@@ -27,6 +27,7 @@ Rectangle {
                     id: path_field
                     width: 250
                     placeholderText: 'Path'
+                    text: home_view ? home_view.get_default_path() : ''
                 }
                 Button {
                     width: 100
