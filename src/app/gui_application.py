@@ -31,13 +31,13 @@ class GuiApplication(Application):
         self._initialize()
         
 
-        root_view = RootView()
+        root_view = RootView(self.engine)
         self.add_view('root_view', root_view)
         home_view = HomeView(self.engine)
         self.add_view('home_view', home_view)
         settings_view = SettingsView(self.engine)
         self.add_view('settings_view', settings_view)
-        project_view = ProjectView()
+        project_view = ProjectView(self.engine)
         self.add_view('project_view', project_view)
         template_view = TemplateView(self.engine)
         self.add_view('template_view', template_view)

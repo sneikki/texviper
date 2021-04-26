@@ -7,7 +7,7 @@ Item {
 
     Text {
         id: projectsTitle
-        text: "Project view"
+        text: 'Project view'
     }
 
 }

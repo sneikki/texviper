@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    color: "white"
+    color: 'white'
 
     Item {
         anchors.left: parent
@@ -19,14 +19,14 @@ Rectangle {
             spacing: 20
 
             Text {
-                text: "New project"
+                text: 'New project'
                 font.pixelSize: 20
             }
 
             TextField {
                 id: name_field
                 width: parent.width
-                placeholderText: "Name"
+                placeholderText: 'Name'
             }
 
             Row {
@@ -35,11 +35,11 @@ Rectangle {
                 TextField {
                     id: path_field
                     width: 250
-                    placeholderText: "Path"
+                    placeholderText: 'Path'
                 }
                 Button {
                     width: 100
-                    text: "Browse"
+                    text: 'Browse'
                 }
             }
 
@@ -47,17 +47,17 @@ Rectangle {
                 spacing: 20
                 Button {
                     width: 170
-                    text: "Cancel"
+                    text: 'Cancel'
                     onClicked: create_project_dialog_popup.close()
                 }
 
                 Button {
                     width: 170
-                    text: "Create"
+                    text: 'Create'
                     onClicked: {
                         home_view.create_project_clicked(name_field.text, path_field.text)
-                        name_field.text = ""
-                        path_field.text = ""
+                        name_field.text = ''
+                        path_field.text = ''
                     }
                 }
             }

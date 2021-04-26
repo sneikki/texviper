@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import 'components'
 
 Item {
     width: parent.width
@@ -7,13 +8,13 @@ Item {
 
     Text {
         id: templatesTitle
-        text: "Templates"
+        text: 'Templates'
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 50
         anchors.topMargin: 50
         font.pixelSize: 20
-        color: "#999999"
+        color: '#999999'
     }
 
     ScrollView {
@@ -28,7 +29,7 @@ Item {
         clip: true
 
         Column {
-            objectName: "templatesListColumn"
+            objectName: 'templatesListColumn'
             id: templatesColumnList
             width: parent.width
             height: parent.height
@@ -38,7 +39,7 @@ Item {
 
     Button {
         id: addTemplateButton
-        text: "Add template"
+        text: 'Add template'
         anchors.left: parent.left
         anchors.top: templatesList.bottom
         anchors.topMargin: 50
@@ -63,7 +64,7 @@ Item {
     }
 
     Popup {
-        objectName: "editTemplateDialog"
+        objectName: 'editTemplateDialog'
         id: editTemplateDialog
         width: window.width - 200
         height: window.height - 200

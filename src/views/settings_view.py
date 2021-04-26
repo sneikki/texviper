@@ -1,13 +1,11 @@
 from PySide2.QtCore import QObject, Slot
 
+from views.view import View
 from config.config import config
 
-class SettingsView(QObject):
+class SettingsView(View):
     def __init__(self, engine):
-        super().__init__()
-
-        self.engine = engine
-        self.root = self.engine.rootObjects()[0]
+        super().__init__(engine)
 
         self.load_settings()
 
@@ -30,6 +28,6 @@ class SettingsView(QObject):
 
         config.save_config()
 
-    def get_setting(self, setting_name, property):
+    def get_setting(self, setting_name, prop):
         setting = self.root.findChild(QObject, setting_name)
-        return setting.property(property)
+        return setting.property(prop)

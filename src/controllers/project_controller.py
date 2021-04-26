@@ -66,7 +66,7 @@ class ProjectController:
             Project: project or None if nothing was found
         """
 
-        project = project_store.find_one(f"project_id = '{project_id}'")
+        project = project_store.find_one(f'project_id = "{project_id}"')
         return project
 
     def get_project_by_name(self, name):
@@ -80,7 +80,7 @@ class ProjectController:
             Project: project or None if nothing was found
         """
 
-        project = project_store.find_one(f"name = '{name}'")
+        project = project_store.find_one(f'name = "{name}"')
         return project
 
     def remove_project(self, project_id):

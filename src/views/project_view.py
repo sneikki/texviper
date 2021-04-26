@@ -1,5 +1,5 @@
-from PySide2.QtCore import QObject, Slot
+from views.view import View
 
-class ProjectView(QObject):
-    def __init__(self):
-        super().__init__()
+class ProjectView(View):
+    def __init__(self, engine):
+        super().__init__(engine)

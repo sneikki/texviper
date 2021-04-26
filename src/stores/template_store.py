@@ -1,7 +1,5 @@
 from pathlib import Path
-from sqlite3 import (
-    IntegrityError, OperationalError
-)
+from sqlite3 import IntegrityError, OperationalError
 
 from models.template import Template
 from db.db_connection import database
@@ -33,10 +31,10 @@ class TemplateStore:
 
         template = self.find_by_id(template_id)
 
-        query = f"""
+        query = f'''
             delete from Templates
-            where template_id='{template_id}'
-        """
+            where template_id="{template_id}"
+        '''
 
         database.execute(query)
         database.commit()
@@ -58,32 +56,32 @@ class TemplateStore:
         self._write(template, source)
 
     def exists(self, name):
-        query = f"""
+        query = f'''
             select template_id from Templates
-            where name='{name}'
-        """
+            where name="{name}"
+        '''
 
         database.execute(query)
         return len(database.fetch_all()) > 0
 
     def find_by_id(self, template_id):
-        return self.find_one(f"template_id='{template_id}'")
+        return self.find_one(f'template_id="{template_id}"')
 
     def find_one(self, conditions):
 
-        query = f"""
+        query = f'''
             select * from Templates
             where {conditions}
-        """
+        '''
 
         database.execute(query)
         template = database.fetch_one()
         return Template(template[1], template[2], template[3], template[0])
 
     def find_all(self):
-        query = """
+        query = '''
             select * from Templates
-        """
+        '''
 
         database.execute(query)
         templates = database.fetch_all()
@@ -100,11 +98,11 @@ class TemplateStore:
     #
 
     def _create_record(self, template):
-        query = f"""
+        query = f'''
             insert into Templates (template_id, name, filename, path)
-            values ('{template.template_id}', '{template.name}',
-            '{template.filename}', '{template.path}')
-        """
+            values ("{template.template_id}", "{template.name}",
+            "{template.filename}', "{template.path}")
+        '''
 
         database.execute(query)
 

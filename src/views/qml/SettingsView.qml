@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import 'components'
 
 Item {
     width: parent.width
@@ -10,13 +11,13 @@ Item {
 
         Text {
             id: settingsTitle
-            text: "Settings"
+            text: 'Settings'
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.leftMargin: 50
             anchors.topMargin: 50
             font.pixelSize: 20
-            color: "#999999"
+            color: '#999999'
         }
 
         Column {
@@ -29,34 +30,34 @@ Item {
             spacing: 20
 
             SettingsEntry {
-                entryName: "Database path"
+                entryName: 'Database path'
 
                 TextField {
-                    objectName: "dbPath"
+                    objectName: 'dbPath'
                     width: 200
                 }
             }
             SettingsEntry {
-                entryName: "Database name"
+                entryName: 'Database name'
 
                 TextField {
-                    objectName: "dbName"
+                    objectName: 'dbName'
                     width: 200
                 }
             }
             SettingsEntry {
-                entryName: "Accent color"
+                entryName: 'Accent color'
 
                 TextField {
-                    objectName: "accentColor"
+                    objectName: 'accentColor'
                     width: 200
                 }
             }
             SettingsEntry {
-                entryName: "Editor font"
+                entryName: 'Editor font'
 
                 TextField {
-                    objectName: "editorFont"
+                    objectName: 'editorFont'
                     width: 200
                 }
             }
@@ -64,7 +65,7 @@ Item {
 
         Button {
             id: saveSettingsButton
-            text: "Save"
+            text: 'Save'
             anchors.top: settingsList.bottom
             anchors.left: parent.left
             anchors.topMargin: 50

@@ -2,19 +2,17 @@ from PySide2.QtCore import QObject, Slot
 from PySide2.QtQuick import QQuickItem
 from PySide2.QtQml import QQmlComponent
 
+from views.view import View
 from controllers.template_controller import template_controller
 from stores.template_store import template_store
 from utils.exceptions import InvalidValueError
 
-class TemplateView(QObject):
+class TemplateView(View):
     def __init__(self, engine):
-        super().__init__()
-
-        self.engine = engine
-        self.root = self.engine.rootObjects()[0]
+        super().__init__(engine)
 
         self.component = QQmlComponent(self.engine)
-        self.component.loadUrl('src/views/qml/TemplateListItem.qml')
+        self.component.loadUrl('src/views/qml/components/TemplateListItem.qml')
         self.templates_list = self.root.findChild(QQuickItem, 'templatesListColumn')
         self.load_templates()
         self.current = None
@@ -41,9 +39,9 @@ class TemplateView(QObject):
             template = template_controller.create_template(name, filename, path, '')
             self.add_template(template)
         except PermissionError:
-            print("Unable to create template: permission denied")
+            print('Unable to create template: permission denied')
         except FileExistsError:
-            print("Unable to create template: template exists")
+            print('Unable to create template: template exists')
         except InvalidValueError as err:
             print(err)
 
@@ -57,11 +55,11 @@ class TemplateView(QObject):
     @Slot(str)
     def edit_clicked(self, template_id):
         source = template_controller.get_source(template_id)
-        child = self.root.findChild(QObject, "editTemplateDialog")
-        child.setProperty("visible", True)
+        child = self.root.findChild(QObject, 'editTemplateDialog')
+        child.setProperty('visible', True)
 
-        child = self.root.findChild(QObject, "editTemplateDialogContent")
-        child.setProperty("text", source)
+        child = self.root.findChild(QObject, 'editTemplateDialogContent')
+        child.setProperty('text', source)
         
         self.current = template_id
 

@@ -1,5 +1,5 @@
-from PySide2.QtCore import QObject
+from views.view import View
 
-class RootView(QObject):
-    def __init__(self):
-        super().__init__()
+class RootView(View):
+    def __init__(self, engine):
+        super().__init__(engine)

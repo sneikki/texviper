@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import 'components'
 
 Item {
     width: parent.width
@@ -13,12 +14,12 @@ Item {
         clip: true
         Rectangle {
                 id: rectangle
-                color: "#ffffff"
+                color: '#ffffff'
                 anchors.fill: parent
                 anchors.topMargin: -1
                 anchors.rightMargin: -1
                 anchors.leftMargin: -1
-                border.color: "#ddd"
+                border.color: '#ddd'
             }
 
         Row {
@@ -27,12 +28,12 @@ Item {
                 anchors.rightMargin: 36
                 spacing: 36
                 Button {
-                    text: qsTr("Import project")
+                    text: qsTr('Import project')
                     onClicked: home_view.import_project_clicked()
                 }
 
                 Button {
-                    text: qsTr("Create new project")
+                    text: qsTr('Create new project')
                     onClicked: create_project_dialog_popup.open()
                 }
         }
@@ -53,7 +54,7 @@ Item {
 
             Grid {
                 id: projects
-                objectName: "projects"
+                objectName: 'projects'
                 width: window.width
                 height: parent.height
                 spacing: 25

@@ -16,7 +16,7 @@ Item {
             id: templateTitle
             x: 0
             y: 0
-            text: "Edit template"
+            text: 'Edit template'
             font.pixelSize: 20
         }
 
@@ -33,13 +33,13 @@ Item {
             spacing: 20
             Button {
                 width: parent.width / 2 - 10
-                text: "Cancel"
+                text: 'Cancel'
                 onClicked: editTemplateDialog.close()
             }
 
             Button {
                 width: parent.width / 2 - 10
-                text: "Save"
+                text: 'Save'
                 onClicked: {
                     template_view.save_clicked(editTemplateDialogContent.text)
                     editTemplateDialog.close()
@@ -49,7 +49,7 @@ Item {
 
         Rectangle {
             id: textEditWrapper
-            color: "#e1e1e1"
+            color: '#e1e1e1'
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: templateTitle.bottom
@@ -65,15 +65,15 @@ Item {
                 clip: true
 
                 TextEdit {
-                    objectName: "editTemplateDialogContent"
+                    objectName: 'editTemplateDialogContent'
                     id: editTemplateDialogContent
-                    color: "#666666"
-                    text: "jdskjdskd"
+                    color: '#666666'
+                    text: 'jdskjdskd'
                     anchors.fill: parent
                     font.pixelSize: 12
                     wrapMode: Text.WrapAnywhere
-                    selectionColor: "#9b9b9b"
-                    font.family: "Source Code Pro"
+                    selectionColor: '#9b9b9b'
+                    font.family: 'Source Code Pro'
                     padding: 25
                     selectByMouse: true
                 }

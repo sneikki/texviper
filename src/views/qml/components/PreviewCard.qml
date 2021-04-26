@@ -7,16 +7,16 @@ Rectangle {
     property var modified
     width: 200
     height: 260
-    color: "white"
+    color: 'white'
     radius: 8
-    border.color: "#eeeeee"
+    border.color: '#eeeeee'
 
     Rectangle {
         x: 0
         y: 0
         width: parent.width
         height: 200
-        color: "#eeeeee"
+        color: '#eeeeee'
         radius: 8
 
         Rectangle {
@@ -25,7 +25,7 @@ Rectangle {
             anchors.bottomMargin: 0
             width: parent.width
             height: 65
-            color: "#eeeeee"
+            color: '#eeeeee'
         }
     }
 
@@ -44,7 +44,7 @@ Rectangle {
         y: 234
         width: 184
         height: 15
-        color: "#a2a2a2"
+        color: '#a2a2a2'
         text: modified
         elide: Text.ElideRight
         font.pixelSize: 12

@@ -1,8 +1,6 @@
 import json
 from pathlib import Path
-from sqlite3 import (
-    IntegrityError, OperationalError
-)
+from sqlite3 import IntegrityError, OperationalError
 
 from models.project import Project
 from db.db_connection import database
@@ -54,10 +52,10 @@ class ProjectStore:
 
         """
 
-        query = f"""
+        query = f'''
             select project_id from Projects
             where name="{name}"
-        """
+        '''
 
         database.execute(query)
         return len(database.fetch_all()) > 0
@@ -66,10 +64,10 @@ class ProjectStore:
 
         project = self.find_by_id(project_id)
 
-        query = f"""
+        query = f'''
             delete from Projects
             where project_id="{project_id}"
-        """
+        '''
         
         database.execute(query)
         database.commit()
@@ -81,7 +79,7 @@ class ProjectStore:
         pass
 
     def open_config(self, project_id):
-        project = self.find_one(f"""project_id='{project_id}'""")
+        project = self.find_one(f'''project_id="{project_id}"''')
         
         if project:
             path = Path(project.path) / project.name / 'projectrc.json'
@@ -92,7 +90,7 @@ class ProjectStore:
             pass
 
     def save_config(self, project_config):
-        path = Path(self.find_one(f"""name='{project_config['name']}'""").path)
+        path = Path(self.find_one(f'''name="{project_config['name']}"''').path)
         name = project_config['name']
 
         with open(path / name / 'projectrc.json', 'w') as out_file:
@@ -111,10 +109,10 @@ class ProjectStore:
         pass
 
     def find_by_id(self, project_id, fields=None):
-        query = f"""
+        query = f'''
             select {database.concatenate_fields(fields)} from Projects
-            where project_id='{project_id}'
-        """
+            where project_id="{project_id}"
+        '''
         database.execute(query)
         return database.fetch_one()
 
@@ -129,10 +127,10 @@ class ProjectStore:
             Project: project or None if nothing was found
         """
 
-        query = f"""
+        query = f'''
             select * from Projects
             where {conditions}
-        """
+        '''
         
         database.execute(query)
         project = database.fetch_one()
@@ -147,9 +145,9 @@ class ProjectStore:
 
         """
 
-        query = f"""
+        query = '''
             select * from Projects
-        """
+        '''
 
         database.execute(query)
         projects = database.fetch_all()
@@ -171,11 +169,11 @@ class ProjectStore:
 
         """
 
-        query = f"""
+        query = f'''
             insert into Projects (project_id, name, path, last_modified)
             values ("{project.project_id}", "{project.name}",
             "{Path(project.path).expanduser()}", "{project.last_modified}")
-        """
+        '''
 
         database.execute(query)
 

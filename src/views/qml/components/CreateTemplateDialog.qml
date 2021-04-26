@@ -16,20 +16,20 @@ Item {
         spacing: 20
 
         Text {
-            text: "New template"
+            text: 'New template'
             font.pixelSize: 20
         }
 
         TextField {
             id: nameField
             width: parent.width
-            placeholderText: "Name"
+            placeholderText: 'Name'
         }
 
         TextField {
             id: filenameField
             width: parent.width
-            placeholderText: "Filename"
+            placeholderText: 'Filename'
         }
 
         Row {
@@ -38,11 +38,11 @@ Item {
             TextField {
                 id: pathField
                 width: 250
-                placeholderText: "Path"
+                placeholderText: 'Path'
             }
             Button {
                 width: 100
-                text: "Browse"
+                text: 'Browse'
             }
         }
 
@@ -50,13 +50,13 @@ Item {
             spacing: 20
             Button {
                 width: 170
-                text: "Cancel"
+                text: 'Cancel'
                 onClicked: createTemplateDialog.close()
             }
 
             Button {
                 width: 170
-                text: "Create"
+                text: 'Create'
                 onClicked: {
                     template_view.create_template_clicked(nameField.text, filenameField.text, pathField.text)
                     nameField.text = ''

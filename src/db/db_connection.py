@@ -23,7 +23,7 @@ class Database:
 
             self.cursor.executescript(init_db_src)
         except OperationalError as err:
-            raise DatabaseConnectionError(f"{literals['database_connection_failed']}: {self.full_path}") from err
+            raise DatabaseConnectionError(f'''{literals['database_connection_failed']}: {self.full_path}''') from err
 
     def close(self):
         if self.connection:

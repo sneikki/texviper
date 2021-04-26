@@ -10,15 +10,15 @@ ApplicationWindow {
     minimumWidth: 640
     minimumHeight: 540
     visible: true
-    color: "white"
+    color: 'white'
 
-    title: qsTr("Texviper")
+    title: qsTr('Texviper')
 
     Rectangle {
         id: menu
         height: 30
         width: parent.width
-        color: "#dfdfdf"
+        color: '#dfdfdf'
         
         Row {
             id: row
@@ -33,13 +33,13 @@ ApplicationWindow {
                 id: home_btn
                 width: window.width / 4
                 height: 30
-                color: (window.active === 0) ? "#189648" : "#d2d2d2"
+                color: (window.active === 0) ? '#189648' : '#d2d2d2'
 
                 Text {
                     id: text1
                     y: 5
-                    color: (window.active === 0) ? "#ffffff" : "#5b5b5b"
-                    text: qsTr("Home")
+                    color: (window.active === 0) ? '#ffffff' : '#5b5b5b'
+                    text: qsTr('Home')
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 16
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -59,14 +59,14 @@ ApplicationWindow {
                 id: project_btn
                 width: window.width / 4
                 height: 30
-                color: (window.active === 1) ? "#189648" : "#d2d2d2"
+                color: (window.active === 1) ? '#189648' : '#d2d2d2'
 
                 Text {
                     id: text2
                     anchors.horizontalCenter: parent.horizontalCenter
                     y: 5
-                    color: (window.active === 1) ? "#ffffff" : "#5b5b5b"
-                    text: "Projects"
+                    color: (window.active === 1) ? '#ffffff' : '#5b5b5b'
+                    text: 'Projects'
                     font.pixelSize: 16
                     font.capitalization: Font.AllUppercase
                 }
@@ -84,14 +84,14 @@ ApplicationWindow {
                 id: settings_btn
                 width: window.width / 4
                 height: 30
-                color: (window.active === 2) ? "#189648" : "#d2d2d2"
+                color: (window.active === 2) ? '#189648' : '#d2d2d2'
 
                 Text {
                     id: text3
                     anchors.horizontalCenter: parent.horizontalCenter
                     y: 5
-                    color: (window.active === 2) ? "#ffffff" : "#5b5b5b"
-                    text: qsTr("Settings")
+                    color: (window.active === 2) ? '#ffffff' : '#5b5b5b'
+                    text: qsTr('Settings')
                     font.pixelSize: 16
                     font.capitalization: Font.AllUppercase
                 }
@@ -109,13 +109,13 @@ ApplicationWindow {
                 id: template_btn
                 width: window.width / 4
                 height: 30
-                color: (window.active === 3) ? "#189648" : "#d2d2d2"
+                color: (window.active === 3) ? '#189648' : '#d2d2d2'
 
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     y: 5
-                    color: (window.active === 3) ? "#ffffff" : "#5b5b5b"
-                    text: qsTr("Templates")
+                    color: (window.active === 3) ? '#ffffff' : '#5b5b5b'
+                    text: qsTr('Templates')
                     font.pixelSize: 16
                     font.capitalization: Font.AllUppercase
                 }
