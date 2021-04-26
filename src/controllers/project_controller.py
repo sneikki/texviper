@@ -25,6 +25,7 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
+        return project
 
     def add_resource(self, name, path, resource_type, project_id): # _todo: error handling
         resource = Resource(name, path, resource_type)

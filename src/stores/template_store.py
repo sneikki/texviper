@@ -41,8 +41,10 @@ class TemplateStore:
         database.execute(query)
         database.commit()
 
-        # try:
-        file_system.remove_file(Path(template.path).expanduser() / template.filename)
+        try:
+            file_system.remove_file(Path(template.path).expanduser() / template.filename)
+        except:
+            pass
 
     def read(self, template_id):
         template = self.find_by_id(template_id)

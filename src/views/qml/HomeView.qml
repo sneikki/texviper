@@ -41,23 +41,35 @@ Item {
     Item {
         id: body
         width: parent.width
-        anchors.top: parent.top
+        anchors.top: header.bottom
         anchors.bottomMargin: 0
         anchors.bottom: parent.bottom
-        anchors.topMargin: 100
+        anchors.topMargin: 0
 
-        Grid {
-            objectName: "projects"
-            id: "projects"
-            anchors.fill: window
-            spacing: 25
+        ScrollView {
+            width: parent.width
+            height: window.height - 130
+            clip: true
+
+            Grid {
+                id: projects
+                objectName: "projects"
+                width: window.width
+                height: parent.height
+                spacing: 25
+
+                onWidthChanged: {
+                    var c = Math.floor(projects.width / 225)
+                    projects.columns = c
+                }
+            }
         }
     }
 
     Popup {
         id: create_project_dialog_popup
         width: 400
-        height: 280
+        height: 270
         x: Math.round((window.width - width) / 2)
         y: Math.round((window.height - height) / 2)
         padding: 20

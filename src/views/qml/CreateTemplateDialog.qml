@@ -59,6 +59,9 @@ Item {
                 text: "Create"
                 onClicked: {
                     template_view.create_template_clicked(nameField.text, filenameField.text, pathField.text)
+                    nameField.text = ''
+                    filenameField.text = ''
+                    pathField.text = ''
                     createTemplateDialog.close()
                 }
             }

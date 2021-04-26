@@ -6,65 +6,71 @@ Item {
     height: parent.height
 
     ScrollView {
-        x: 25
-        y: 76
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: settingsTitle.bottom
-        anchors.bottom: saveButton.top
-        anchors.leftMargin: 50
-        anchors.rightMargin: 0
-        anchors.bottomMargin: 50
-        clip: true
+        anchors.fill: parent
+
+        Text {
+            id: settingsTitle
+            text: "Settings"
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.leftMargin: 50
+            anchors.topMargin: 50
+            font.pixelSize: 20
+            color: "#999999"
+        }
 
         Column {
+            id: settingsList
+            anchors.top: settingsTitle.bottom
+            anchors.left: parent.left
+            anchors.topMargin: 50
+            anchors.leftMargin: 50
+            width: parent.width
             spacing: 20
 
             SettingsEntry {
                 entryName: "Database path"
+
                 TextField {
-                    text: "~/.texviper"
-                    width: 300
+                    objectName: "dbPath"
+                    width: 200
                 }
             }
             SettingsEntry {
                 entryName: "Database name"
+
                 TextField {
-                    text: "texviper.db"
-                    width: 300
+                    objectName: "dbName"
+                    width: 200
                 }
             }
             SettingsEntry {
                 entryName: "Accent color"
+
                 TextField {
-                    text: "#432432"
-                    width: 300
+                    objectName: "accentColor"
+                    width: 200
                 }
             }
             SettingsEntry {
                 entryName: "Editor font"
+
                 TextField {
-                    text: "Source Code Pro"
-                    width: 300
+                    objectName: "editorFont"
+                    width: 200
                 }
             }
         }
-    }
 
-    Text {
-        anchors.verticalCenter: parent.verticalCenter
-        x: 25
-        y: 25
-        color: "#979797"
-        text: "Settings"
-        font.pixelSize: 16
-    }
-
-    Button {
-        id: saveButton
-        text: "Save"
-        y: window.height - 100
-        x: 50
-        width: 250
+        Button {
+            id: saveSettingsButton
+            text: "Save"
+            anchors.top: settingsList.bottom
+            anchors.left: parent.left
+            anchors.topMargin: 50
+            anchors.leftMargin: 50
+            width: 200
+            onClicked: settings_view.save_settings()
+        }
     }
 }

@@ -14,7 +14,7 @@ class TemplateView(QObject):
         self.root = self.engine.rootObjects()[0]
 
         self.component = QQmlComponent(self.engine)
-        self.component.loadUrl('src/views/qml/TemplateListItem.qml')        
+        self.component.loadUrl('src/views/qml/TemplateListItem.qml')
         self.templates_list = self.root.findChild(QQuickItem, 'templatesListColumn')
         self.load_templates()
         self.current = None

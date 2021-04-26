@@ -12,7 +12,7 @@ ApplicationWindow {
     visible: true
     color: "white"
 
-    title: qsTr("hello world")
+    title: qsTr("Texviper")
 
     Rectangle {
         id: menu
@@ -48,7 +48,7 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
+                    onPressed: {
                         windowsLayout.currentIndex = 0
                         window.active = 0
                     }
@@ -73,7 +73,7 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
+                    onPressed: {
                         windowsLayout.currentIndex = 1
                         window.active = 1
                     }
@@ -98,7 +98,7 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
+                    onPressed: {
                         windowsLayout.currentIndex = 2
                         window.active = 2
                     }

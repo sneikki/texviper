@@ -33,9 +33,9 @@ class GuiApplication(Application):
 
         root_view = RootView()
         self.add_view('root_view', root_view)
-        home_view = HomeView()
+        home_view = HomeView(self.engine)
         self.add_view('home_view', home_view)
-        settings_view = SettingsView()
+        settings_view = SettingsView(self.engine)
         self.add_view('settings_view', settings_view)
         project_view = ProjectView()
         self.add_view('project_view', project_view)

@@ -6,6 +6,8 @@ Item {
     height: parent.height
 
     Text {
+        id: projectsTitle
         text: "Project view"
     }
+
 }

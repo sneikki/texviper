@@ -2,10 +2,11 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
+    property var project_id
     property var name
     property var modified
     width: 200
-    height: 250
+    height: 260
     color: "white"
     radius: 8
     border.color: "#eeeeee"
@@ -20,28 +21,17 @@ Rectangle {
 
         Rectangle {
             x: 0
-            y: 130
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
             width: parent.width
             height: 65
             color: "#eeeeee"
         }
-
-        Text {
-            x: 31
-            y: 88
-            color: "#999999"
-            text: qsTr("Preview N/A")
-            anchors.left: parent.left
-            anchors.top: parent.top
-            font.pixelSize: 16
-            anchors.leftMargin: 56
-            anchors.topMargin: 88
-        }
     }
 
     Text {
-        x: 8
-        y: 205
+        x: 16
+        y: 210
         width: 184
         height: 15
         text: name
@@ -50,8 +40,8 @@ Rectangle {
     }
 
     Text {
-        x: 8
-        y: 224
+        x: 16
+        y: 234
         width: 184
         height: 15
         color: "#a2a2a2"

@@ -54,7 +54,11 @@ Rectangle {
                 Button {
                     width: 170
                     text: "Create"
-                    onClicked: home_view.create_project_clicked(name_field.text, path_field.text)
+                    onClicked: {
+                        home_view.create_project_clicked(name_field.text, path_field.text)
+                        name_field.text = ""
+                        path_field.text = ""
+                    }
                 }
             }
         }

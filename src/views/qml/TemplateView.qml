@@ -6,45 +6,45 @@ Item {
     height: parent.height
 
     Text {
-            id: templatesTitle
-            text: "Templates"
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.leftMargin: 50
-            anchors.topMargin: 50
-            font.pixelSize: 20
-            color: "#999999"
-        }
+        id: templatesTitle
+        text: "Templates"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 50
+        anchors.topMargin: 50
+        font.pixelSize: 20
+        color: "#999999"
+    }
 
-        ScrollView {
-            id: templatesList
-            anchors.right: parent.right
-            anchors.rightMargin: 50
-            anchors.left: parent.left
-            anchors.top: templatesTitle.bottom
-            anchors.leftMargin: 50
-            anchors.topMargin: 50
-            height: window.height - 300
-            clip: true
+    ScrollView {
+        id: templatesList
+        anchors.right: parent.right
+        anchors.rightMargin: 50
+        anchors.left: parent.left
+        anchors.top: templatesTitle.bottom
+        anchors.leftMargin: 50
+        anchors.topMargin: 50
+        height: window.height - 300
+        clip: true
 
-            Column {
-                objectName: "templatesListColumn"
-                id: templatesColumnList
-                width: parent.width
-                height: parent.height
-                spacing: 20
-            }
+        Column {
+            objectName: "templatesListColumn"
+            id: templatesColumnList
+            width: parent.width
+            height: parent.height
+            spacing: 20
         }
+    }
 
-        Button {
-            id: addTemplateButton
-            text: "Add template"
-            anchors.left: parent.left
-            anchors.top: templatesList.bottom
-            anchors.topMargin: 50
-            anchors.leftMargin: 50
-            onClicked: createTemplateDialog.open()
-        }
+    Button {
+        id: addTemplateButton
+        text: "Add template"
+        anchors.left: parent.left
+        anchors.top: templatesList.bottom
+        anchors.topMargin: 50
+        anchors.leftMargin: 50
+        onClicked: createTemplateDialog.open()
+    }
 
     Popup {
         id: createTemplateDialog
