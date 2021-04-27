@@ -21,7 +21,7 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        config.open_config('src/config/default_config.json')
+        config.open_config()
 
     def setUp(self):
         # IMPORTANT: initialization must be done in this order,
