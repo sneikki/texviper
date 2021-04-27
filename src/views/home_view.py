@@ -1,4 +1,4 @@
-from datetime import datetime
+import dateutil.parser
 from PySide2.QtCore import QObject, Slot, QUrl
 from PySide2.QtQml import QQmlComponent
 from PySide2.QtQuick import QQuickItem
@@ -35,7 +35,7 @@ class HomeView(View):
         item.setParent(self.projects_list)
 
     def timestamp_to_date(self, timestamp):
-        return str(datetime.fromisoformat(timestamp).date())
+        return str(dateutil.parser.isoparse(timestamp).date())
 
     @Slot(str, str)
     def create_project_clicked(self, name, path):
