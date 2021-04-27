@@ -46,9 +46,9 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 
 ### Sovellusasetukset
 
-* käyttäjä voi luoda, muokata tai poistaa templateja joita käytetään uuden projektin alustuksessa
-* käyttäjä voi määrittää projektien tallennuspaikan
-* käyttäjä voi määrittää tietokannan sijainnin
+* käyttäjä voi luoda, muokata ja poistaa templateja joita käytetään uuden projektin alustuksessa **[tehty]**
+* käyttäjä voi määrittää projektien oletustallennuspaikan **[tehty]**
+* käyttäjä voi määrittää tietokannan sijainnin **[tehty]**
 
 ## Jatkokehitysmahdollisuuksia
 

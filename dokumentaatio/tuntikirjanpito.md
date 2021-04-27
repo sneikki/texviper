@@ -11,4 +11,9 @@
 | 18.4.         | 4             | project storen, tietokannan ja configin rassausta         |
 | 19.4.         | 3             | projektien poistamisen toteutus + refaktorointia          |
 | 20.4.         | 1             | project storen rikkinäisten testien korjaus               |
-| **Yht.**      | **24**        |                                                           |
+| 23.4.         | 4             | gui:n toteutusta                                          |
+| 24.4.         | 1             | controllerien toteutusta                                  |
+| 25.4.         | 5             | gui:n toteutusta + korjaus ongelmiin poluissa             |
+| 26.4.         | 2             | gui:n toteutusta + vieweille yhteinen base class          |
+| 27.4.         | 5             | gui:n toteutusta + konfiguraatiopolun korjaus testeihin   |
+| **Yht.**      | **41**        |                                                           |
