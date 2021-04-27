@@ -50,6 +50,7 @@ Rectangle {
                         home_view.create_project_clicked(name_field.text, path_field.text)
                         name_field.text = ''
                         path_field.text = ''
+                        create_project_dialog_popup.close()
                     }
                 }
             }
