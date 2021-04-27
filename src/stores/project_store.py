@@ -105,6 +105,11 @@ class ProjectStore:
             resource_store.serialize(resource))
         self.save_config(project_config)
 
+    def set_root_file(self, filename, project_id):
+        project_config = self.open_config(project_id)
+        project_config['root'] = filename
+        self.save_config(project_config)
+
     def remove_resource(self, resource_id, project_id):
         pass
 

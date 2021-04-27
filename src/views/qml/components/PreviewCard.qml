@@ -6,7 +6,7 @@ Rectangle {
     property var name
     property var modified
     width: 200
-    height: 260
+    height: 280
     color: 'white'
     radius: 8
     border.color: '#eeeeee'
@@ -47,5 +47,40 @@ Rectangle {
         text: modified || ""
         elide: Text.ElideRight
         font.pixelSize: 12
+    }
+
+    Row {
+        y: 256
+        width: parent.width
+
+        Text {
+            text: 'Open'
+            color: '#a2a2a2'
+            width: parent.width / 2
+            horizontalAlignment: Text.AlignHCenter
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    project_view.open_project(project_id)
+                }
+            }
+        }
+
+        Text {
+            text: 'Remove'
+            color: '#a2a2a2'
+            width: parent.width / 2
+            horizontalAlignment: Text.AlignHCenter
+        
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    home_view.request_project_removal(project_id)
+                }
+            }
+        }
     }
 }

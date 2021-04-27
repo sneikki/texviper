@@ -1,7 +1,11 @@
+from pathlib import Path
+
 from models.project import Project
 from models.resource import Resource
 from stores.project_store import project_store
 from utils.exceptions import ProjectExistsError, InvalidValueError
+from config.config import config
+from utils.filesystem import file_system
 
 class ProjectController:
     """ Handles logical operations for projects
@@ -25,12 +29,20 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
+        self.add_resource(config.get_value('root_filename'), '.', 'root', project.project_id, Path(project.path) / project.name, True)
+        project_store.set_root_file(config.get_value('root_filename'), project.project_id)
+
         return project
 
-    def add_resource(self, name, path, resource_type, project_id): # _todo: error handling
+    def add_resource(self, name, path, resource_type, project_id, project_path, create=False): # _todo: error handling
         resource = Resource(name, path, resource_type)
 
         project_store.add_resource(resource, project_id)
+
+        full_path = project_path.expanduser() / path / name
+        if create and not file_system.file_exists(full_path):
+            file_system.create_directory(Path(project_path) / path)
+            file_system.create_file(full_path)
 
     def remove_resource(self, resource_id, project_id):
         project_store.remove_resource(resource_id, project_id)

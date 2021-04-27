@@ -61,3 +61,21 @@ class HomeView(View):
     def get_default_path(self):
         return config.get_value('default_project_path')
         
+    @Slot(str)
+    def request_project_removal(self, project_id):
+        self.project_to_remove = project_id
+        project = project_controller.get_project_by_id(project_id)
+        if not project:
+            return
+
+        child = self.root.findChild(QObject, 'confirmRemovalDialog')
+        child.setProperty('visible', True)
+
+        child.setProperty('text', f'Do you want to remove project {project.name}?')
+
+    @Slot()
+    def remove_confirmed(self):
+        project_controller.remove_project(self.project_to_remove)
+
+        child = self.root.findChild(QQuickItem, self.project_to_remove)
+        child.deleteLater()

@@ -66,6 +66,15 @@ Item {
             }
 
             SettingsEntry {
+                entryName: 'Root filename'
+
+                TextField {
+                    objectName: 'rootFilename'
+                    width: 200
+                }
+            }
+
+            SettingsEntry {
                 entryName: 'Accent color'
 
                 TextField {

@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Dialogs 1.1
 import 'components'
 
 Item {
@@ -79,6 +80,17 @@ Item {
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
         CreateProjectDialog {
+        }
+    }
+
+    MessageDialog {
+        id: confirmRemovalDialog
+        objectName: 'confirmRemovalDialog'
+        title: "Remove project"
+        text: "Confirm project removal"
+        standardButtons: StandardButton.Cancel | StandardButton.Yes
+        onYes: {
+            home_view.remove_confirmed()
         }
     }
 }

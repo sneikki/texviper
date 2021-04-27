@@ -14,6 +14,7 @@ class SettingsView(View):
         self.load_setting('dbName', 'text', config.get_value('db_name'))
         self.load_setting('projectLocation', 'text', config.get_value('default_project_path'))
         self.load_setting('templateLocation', 'text', config.get_value('default_template_path'))
+        self.load_setting('rootFilename', 'text', config.get_value('root_filename'))
         self.load_setting('accentColor', 'text', config.get_value('accent_color'))
         self.load_setting('editorFont', 'text', config.get_value('editor_font'))
 
@@ -27,6 +28,7 @@ class SettingsView(View):
         config.set_value('db_name', self.get_setting('dbName', 'text'))
         config.set_value('default_project_path', self.get_setting('projectLocation', 'text'))
         config.set_value('default_template_path', self.get_setting('templateLocation', 'text'))
+        config.set_value('root_filename', self.get_setting('rootFilename', 'text'))
         config.set_value('accent_color', self.get_setting('accentColor', 'text'))
         config.set_value('editor_font', self.get_setting('editorFont', 'text'))
 

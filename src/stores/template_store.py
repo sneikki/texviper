@@ -101,7 +101,7 @@ class TemplateStore:
         query = f'''
             insert into Templates (template_id, name, filename, path)
             values ("{template.template_id}", "{template.name}",
-            "{template.filename}', "{template.path}")
+            "{template.filename}", "{template.path}")
         '''
 
         database.execute(query)

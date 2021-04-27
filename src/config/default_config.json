@@ -3,6 +3,7 @@
     "db_name": "texviper.db",
     "default_project_path": "~/.texviper/projects",
     "default_template_path": "~/.texviper/templates",
+    "root_filename": "main.tex",
     "accent_color": "purple",
     "editor_font": "Source Code Pro"
 }

@@ -134,9 +134,11 @@ ApplicationWindow {
 
     StackLayout {
         id: windowsLayout
+        objectName: 'windowsLayout'
         anchors.top: menu.bottom
         anchors.topMargin: 0
         width: parent.width
+        height: parent.height
 
         currentIndex: 0
 
