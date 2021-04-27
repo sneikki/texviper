@@ -12,6 +12,7 @@ Item {
     width: parent.width
     height: parent.height
     property var openProject
+    property var openProjectName
 
     Loader {
         sourceComponent: openProject ? openView : emptyView
@@ -57,7 +58,7 @@ Item {
                     
                     Text {
                         id: projectName
-                        text: 'Johdatus lineaarialgebraan'
+                        text: openProjectName
                         font.pixelSize: 12
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter

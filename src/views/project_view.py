@@ -11,15 +11,13 @@ class ProjectView(View):
 
     @Slot(str)
     def open_project(self, project_id):
+        project = project_controller.get_project_by_id(project_id)
+        self.current_project = project
         open_view = self.root.findChild(QObject, 'projectView')
-        open_view.setProperty('openProject', project_id)
+        open_view.setProperty('openProject', 'ddd')
+        open_view.setProperty('openProjectName', project.name)
 
         self.load_project(project_id)
 
     def load_project(self, project_id):
-        project = project_controller.get_project_by_id(project_id)
-        self.current_project = project
-
-
-        resource_list = self.root.findChild(QObject, 'resourceList')
-        
+        pass
