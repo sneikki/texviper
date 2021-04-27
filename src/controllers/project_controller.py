@@ -29,7 +29,7 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
-        self.add_resource(config.get_value('root_filename'), '.', 'root', project.project_id, Path(project.path) / project.name, True)
+        self.add_resource(config.get_value('root_filename'), '.', 'root', project.project_id, Path(project.path).expanduser() / project.name, True)
         project_store.set_root_file(config.get_value('root_filename'), project.project_id)
 
         return project
@@ -39,7 +39,7 @@ class ProjectController:
 
         project_store.add_resource(resource, project_id)
 
-        full_path = project_path.expanduser() / path / name
+        full_path = project_path / path / name
         if create and not file_system.file_exists(full_path):
             file_system.create_directory(Path(project_path) / path)
             file_system.create_file(full_path)
