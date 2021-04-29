@@ -50,14 +50,16 @@ Item {
 
         ScrollView {
             width: parent.width
-            height: window.height - 130
+            height: window.height - 155
             clip: true
 
             Grid {
                 id: projects
                 objectName: 'projects'
-                width: window.width
-                height: parent.height
+                width: window.width - 25
+                height: parent.height - 25
+                x: 25
+                y: 25
                 spacing: 25
 
                 onWidthChanged: {
