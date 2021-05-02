@@ -1,5 +1,6 @@
 from uuid import uuid4 as uuid
 
+
 class Template:
     """ Represents a template to used for resource initialization
 
@@ -9,7 +10,7 @@ class Template:
             path:           path of the template in file system
             template_id:    unique identifier of the template
     """
-    
+
     def __init__(self, name, filename, path, template_id=None):
 
         self.template_id = template_id or str(uuid())

@@ -10,6 +10,7 @@ from utils.exceptions import (
 )
 from config.config import config
 
+
 class HomeView(View):
     def __init__(self, engine):
         super().__init__(engine)
@@ -29,7 +30,8 @@ class HomeView(View):
         item = self.component.create()
         item.setProperty('project_id', project.project_id)
         item.setProperty('name', project.name)
-        item.setProperty('modified', f'Last modified: {self.timestamp_to_date(project.last_modified)}')
+        item.setProperty(
+            'modified', f'Last modified: {self.timestamp_to_date(project.last_modified)}')
         item.setObjectName(project.project_id)
         item.setParentItem(self.projects_list)
         item.setParent(self.projects_list)
@@ -60,7 +62,7 @@ class HomeView(View):
     @Slot(result=str)
     def get_default_path(self):
         return config.get_value('default_project_path')
-        
+
     @Slot(str)
     def request_project_removal(self, project_id):
         self.project_to_remove = project_id
@@ -71,7 +73,8 @@ class HomeView(View):
         child = self.root.findChild(QObject, 'confirmRemovalDialog')
         child.setProperty('visible', True)
 
-        child.setProperty('text', f'Do you want to remove project {project.name}?')
+        child.setProperty(
+            'text', f'Do you want to remove project {project.name}?')
 
     @Slot()
     def remove_confirmed(self):

@@ -7,6 +7,7 @@ from db.db_connection import database
 from utils.filesystem import file_system
 from utils.exceptions import ProjectExistsError
 
+
 class ProjectControllerTest(fake_filesystem_unittest.TestCase):
     #
     #   Setup
@@ -34,7 +35,7 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
         project_controller.create_project('test_project', '.')
 
         self.assertRaises(ProjectExistsError,
-            project_controller.create_project, 'test_project', '.')
+                          project_controller.create_project, 'test_project', '.')
 
     def test_get_projects_returns_all_names(self):
         project_controller.create_project('test_project_1', '.')
@@ -53,5 +54,4 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
         project_id = database.fetch_one()[0]
 
         self.assertEqual(project_id,
-            project_controller.get_project_by_id(project_id).project_id)
-
+                         project_controller.get_project_by_id(project_id).project_id)

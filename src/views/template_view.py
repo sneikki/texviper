@@ -8,20 +8,21 @@ from stores.template_store import template_store
 from utils.exceptions import InvalidValueError
 from config.config import config
 
+
 class TemplateView(View):
     def __init__(self, engine):
         super().__init__(engine)
 
         self.component = QQmlComponent(self.engine)
         self.component.loadUrl('src/views/qml/components/TemplateListItem.qml')
-        self.templates_list = self.root.findChild(QQuickItem, 'templatesListColumn')
+        self.templates_list = self.root.findChild(
+            QQuickItem, 'templatesListColumn')
         self.load_templates()
         self.current = None
 
-
     def load_templates(self):
         templates = template_controller.get_templates()
-        
+
         for template in templates:
             self.add_template(template)
 
@@ -37,7 +38,8 @@ class TemplateView(View):
     def create_template_clicked(self, name, filename, path):
 
         try:
-            template = template_controller.create_template(name, filename, path, '')
+            template = template_controller.create_template(
+                name, filename, path, '')
             self.add_template(template)
         except PermissionError:
             print('Unable to create template: permission denied')
@@ -61,7 +63,7 @@ class TemplateView(View):
 
         child = self.root.findChild(QObject, 'editTemplateDialogContent')
         child.setProperty('text', source)
-        
+
         self.current = template_id
 
     @Slot(str)

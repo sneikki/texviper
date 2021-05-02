@@ -9,6 +9,7 @@ from utils.exceptions import DirectoryNotEmptyError
 from utils.filesystem import file_system
 from stores.resource_store import resource_store
 
+
 class ProjectStore:
     #
     #   Public
@@ -68,7 +69,7 @@ class ProjectStore:
             delete from Projects
             where project_id="{project_id}"
         '''
-        
+
         database.execute(query)
         database.commit()
 
@@ -80,7 +81,7 @@ class ProjectStore:
 
     def open_config(self, project_id):
         project = self.find_one(f'''project_id="{project_id}"''')
-        
+
         if project:
             path = Path(project.path) / project.name / 'projectrc.json'
             with open(path) as config_file:
@@ -122,12 +123,11 @@ class ProjectStore:
         return database.fetch_one()
 
     def find_one(self, conditions):
-
         """ Looks for a single project by given conditions
 
         Args:
             conditions (list): List of conditions for limiting the query
-        
+
         Returns:
             Project: project or None if nothing was found
         """
@@ -136,7 +136,7 @@ class ProjectStore:
             select * from Projects
             where {conditions}
         '''
-        
+
         database.execute(query)
         project = database.fetch_one()
         return Project(project[1], project[2], project[0], project[3]) if project else None
@@ -167,7 +167,8 @@ class ProjectStore:
 
         return list(
             map(
-                lambda res: resource_store.create(res['name'], res['path'], res['type'], res['resource_id']),
+                lambda res: resource_store.create(
+                    res['name'], res['path'], res['type'], res['resource_id']),
                 project_config['resources']
             )
         )
@@ -205,7 +206,8 @@ class ProjectStore:
         expanded_path = Path(project.path).expanduser() / project.name
 
         self._initialize_directory(expanded_path)
-        self._initialize_config(expanded_path, project.project_id, project.name)
+        self._initialize_config(
+            expanded_path, project.project_id, project.name)
 
     def _initialize_directory(self, path):
         """ Initializes project directory at desired location.
@@ -253,5 +255,6 @@ class ProjectStore:
             file_system.remove_directory(full_path)
         except (FileNotFoundError, PermissionError):
             pass
+
 
 project_store = ProjectStore()

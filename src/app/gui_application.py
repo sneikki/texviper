@@ -13,10 +13,11 @@ from views.project_view import ProjectView
 from views.settings_view import SettingsView
 from views.template_view import TemplateView
 
+
 class GuiApplication(Application):
     def __init__(self):
         super().__init__()
-    
+
     def run(self):
         try:
             super().run()
@@ -24,12 +25,10 @@ class GuiApplication(Application):
             print(db_err)
             sys.exit(-1)
 
-        
         self._run()
 
     def _run(self):
         self._initialize()
-        
 
         root_view = RootView(self.engine)
         self.add_view('root_view', root_view)
@@ -50,7 +49,6 @@ class GuiApplication(Application):
         sys.argv += ['--style', 'material']
         self.app = QGuiApplication(sys.argv)
         self.engine = QQmlApplicationEngine()
-
 
         self.engine.load(QUrl('src/views/qml/RootView.qml'))
         # self.app.exec_()

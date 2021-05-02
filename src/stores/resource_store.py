@@ -1,7 +1,8 @@
 from models.resource import Resource
 
+
 class ResourceStore:
-    
+
     def create(self, name, path, resource_type, resource_id=None):
         return Resource(name, path, resource_type, resource_id)
 
@@ -12,6 +13,7 @@ class ResourceStore:
         pass
 
     def serialize(self, resource):
-        return { 'resource_id': resource.resource_id, 'name': resource.name, 'path': resource.path, 'type': resource.type }
+        return {'resource_id': resource.resource_id, 'name': resource.name, 'path': resource.path, 'type': resource.type}
+
 
 resource_store = ResourceStore()

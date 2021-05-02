@@ -1,5 +1,6 @@
 import shutil
 
+
 class FileSystem:
     def directory_exists(self, path):
         return path.exists()
@@ -11,7 +12,7 @@ class FileSystem:
         return next(path.iterdir(), None) is None
 
     def create_directory(self, path):
-        path.mkdir(parents=True,exist_ok=True)
+        path.mkdir(parents=True, exist_ok=True)
 
     def copy(self, source, destination):
         shutil.copy(source, destination)
@@ -27,5 +28,6 @@ class FileSystem:
 
     def remove_file(self, path):
         path.unlink()
+
 
 file_system = FileSystem()

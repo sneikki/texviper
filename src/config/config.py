@@ -8,6 +8,7 @@ from utils.filesystem import file_system
 CONFIG_PATH = '~/.texviper'
 CONFIG_NAME = 'config.json'
 
+
 class Config:
     def __init__(self):
         self.config_values = dict()
@@ -66,5 +67,6 @@ class Config:
 
         with open(path, 'w') as config_file:
             dump(self.config_values, config_file)
+
 
 config = Config()

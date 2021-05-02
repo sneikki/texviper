@@ -2,6 +2,7 @@ from controllers.project_controller import project_controller
 from utils.exceptions import DirectoryNotEmptyError, ProjectExistsError
 from sqlite3 import IntegrityError
 
+
 def run():
 
     while True:
@@ -40,8 +41,9 @@ def run():
 
             project = project_controller.get_project_by_name(project_name)
 
-            project_controller.add_resource(name, path, resource_type, project.project_id)
-        
+            project_controller.add_resource(
+                name, path, resource_type, project.project_id)
+
             print(f"Added {name} to {project_name}")
         else:
             break

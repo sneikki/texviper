@@ -5,6 +5,7 @@ from models.template import Template
 from db.db_connection import database
 from utils.filesystem import file_system
 
+
 class TemplateStore:
 
     #
@@ -40,7 +41,8 @@ class TemplateStore:
         database.commit()
 
         try:
-            file_system.remove_file(Path(template.path).expanduser() / template.filename)
+            file_system.remove_file(
+                Path(template.path).expanduser() / template.filename)
         except:
             pass
 
@@ -113,5 +115,6 @@ class TemplateStore:
 
         full_path = expanded_path / template.filename
         file_system.write(full_path, source)
+
 
 template_store = TemplateStore()

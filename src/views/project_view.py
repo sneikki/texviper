@@ -4,6 +4,7 @@ from PySide2.QtQml import QQmlComponent
 from views.view import View
 from controllers.project_controller import project_controller
 
+
 class ProjectView(View):
     def __init__(self, engine):
         super().__init__(engine)
@@ -23,7 +24,7 @@ class ProjectView(View):
 
     def is_project_open(self, project_id):
         return len([project for project in self.open_projects
-            if project.project_id == project_id]) > 0
+                    if project.project_id == project_id]) > 0
 
     @Slot(str)
     def open_project(self, project_id):
@@ -45,13 +46,13 @@ class ProjectView(View):
         resources = project_controller.get_resources(project_id)
 
         editor = self.project_stack.find_editor(project_id)
-        
+
         for resource in resources:
             editor.add_resource(resource.name, resource.resource_id)
 
     def create_editor_view(self, project):
         self.project_stack.add_editor_view(project.name, project.project_id)
-        
+
         # Add tab
         tab = self.components['project_tab'].create()
         tab.setProperty('text', project.name)
@@ -110,7 +111,8 @@ class ProjectView(View):
         tab.deleteLater()
         self.tabs[self.current] = None
 
-        self.open_projects = list(filter(lambda p: p.project_id != self.current, self.open_projects))
+        self.open_projects = list(
+            filter(lambda p: p.project_id != self.current, self.open_projects))
 
         if len(self.open_projects) >= 1:
             self.current = self.open_projects[-1].project_id

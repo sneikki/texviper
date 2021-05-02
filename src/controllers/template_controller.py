@@ -2,6 +2,7 @@ from models.template import Template
 from stores.template_store import template_store
 from utils.exceptions import InvalidValueError
 
+
 class TemplateController:
     def create_template(self, name, filename, path, source):
         if not name:
@@ -30,5 +31,6 @@ class TemplateController:
 
     def get_source(self, template_id):
         return template_store.read(template_id)
+
 
 template_controller = TemplateController()

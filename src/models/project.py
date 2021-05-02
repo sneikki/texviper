@@ -1,6 +1,7 @@
 from uuid import uuid4 as uuid
 from datetime import datetime
 
+
 class Project:
     """ Represents a single project
 

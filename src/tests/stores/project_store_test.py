@@ -10,11 +10,12 @@ from config.config import config
 from db.db_connection import database
 from utils.filesystem import file_system
 
+
 class ProjectStoreTest(fake_filesystem_unittest.TestCase):
     #
     #   Setup
     #
-    
+
     @classmethod
     def setUpClass(cls):
         config.open_config(use_default=True)
@@ -43,7 +44,8 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
         project = Project('test_project', '.')
         project_store.create(project)
 
-        database.execute("""select * from Projects where name='test_project'""")
+        database.execute(
+            """select * from Projects where name='test_project'""")
         res = database.fetch_one()
 
         self.assertEqual(len(res), 4)
@@ -56,7 +58,8 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
         project = Project(name, path, project_id, timestamp)
         project_store.create(project)
 
-        database.execute("""select * from Projects where name='test_project'""")
+        database.execute(
+            """select * from Projects where name='test_project'""")
         res = database.fetch_one()
         print(res)
         self.assertEqual(res[0], project_id)
@@ -71,16 +74,17 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
         project = Project('test_project', '.')
 
         self.assertRaises(FileExistsError,
-            project_store.create, project)
+                          project_store.create, project)
 
-        self.assertFalse(file_system.file_exists(Path('test_project/projectrc.json')))
+        self.assertFalse(file_system.file_exists(
+            Path('test_project/projectrc.json')))
 
     def test_create_fails_with_bad_permission(self):
         Path('permission_000').mkdir(0o000)
 
         project = Project('project', 'permission_000')
         self.assertRaises(PermissionError,
-            project_store.create, project)
+                          project_store.create, project)
 
     def test_create_initializes_project_correctly(self):
         project_id = str(uuid())
@@ -99,7 +103,8 @@ class ProjectStoreTest(fake_filesystem_unittest.TestCase):
         project_store.create(project)
 
         project_store.delete_one(project.project_id)
-        database.execute(f"""select * from Projects where project_id='{project.project_id}'""")
+        database.execute(
+            f"""select * from Projects where project_id='{project.project_id}'""")
         self.assertIsNone(database.fetch_one())
 
     def test_delete_removes_project_directory(self):

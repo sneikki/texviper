@@ -1,6 +1,7 @@
 from db.db_connection import database, DatabaseConnectionError
 from config.config import config
 
+
 class Application:
     def __init__(self):
         pass
@@ -11,4 +12,3 @@ class Application:
             database.connect()
         except DatabaseConnectionError as db_err:
             raise db_err
-    

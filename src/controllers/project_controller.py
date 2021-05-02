@@ -7,6 +7,7 @@ from utils.exceptions import ProjectExistsError, InvalidValueError
 from config.config import config
 from utils.filesystem import file_system
 
+
 class ProjectController:
     """ Handles logical operations for projects
     """
@@ -29,13 +30,17 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
-        self.add_resource(config.get_value('root_filename'), '.', 'tex', project.project_id, Path(project.path).expanduser() / project.name, True)
-        self.add_resource('projectrc.json', '.', 'config', project.project_id, Path(project.path).expanduser() / 'projectrc.json')
-        project_store.set_root_file(config.get_value('root_filename'), project.project_id)
+        self.add_resource(config.get_value('root_filename'), '.', 'tex', project.project_id, Path(
+            project.path).expanduser() / project.name, True)
+        self.add_resource('projectrc.json', '.', 'config', project.project_id, Path(
+            project.path).expanduser() / 'projectrc.json')
+        project_store.set_root_file(config.get_value(
+            'root_filename'), project.project_id)
 
         return project
 
-    def add_resource(self, name, path, resource_type, project_id, project_path, create=False): # _todo: error handling
+    # _todo: error handling
+    def add_resource(self, name, path, resource_type, project_id, project_path, create=False):
         resource = Resource(name, path, resource_type)
 
         project_store.add_resource(resource, project_id)
@@ -95,11 +100,12 @@ class ProjectController:
 
         project = project_store.find_one(f'name = "{name}"')
         return project
-    
+
     def read_resource(self, resource_id, project_id):
         print(project_id, "fjkldsjflsdjflkdsjflkj")
         resources = project_store.get_resources(project_id)
-        resource = [resource for resource in resources if resource.resource_id == resource_id][0]
+        resource = [
+            resource for resource in resources if resource.resource_id == resource_id][0]
         project = project_store.find_by_id(project_id)
         path = Path(project[2]) / project[1] / resource.path / resource.name
         return path.read_text()
@@ -115,5 +121,6 @@ class ProjectController:
         """
 
         project_store.delete_one(project_id)
+
 
 project_controller = ProjectController()
