@@ -14,7 +14,7 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        config.open_config()
+        config.open_config(use_default=True)
 
     def setUp(self):
         database.connect(':memory:')

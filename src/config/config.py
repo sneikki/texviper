@@ -1,4 +1,4 @@
-from json import dumps, dump, load
+from json import dumps, dump, load, JSONDecodeError
 from pathlib import Path
 from shutil import copyfile
 
@@ -27,7 +27,15 @@ class Config:
     def set_value(self, name, value):
         self.config_values[name] = value
 
-    def open_config(self, cfg_path=None):
+    def open_default_config(self):
+        with open('src/config/default_config.json') as default_config:
+            return load(default_config)
+
+    def open_config(self, cfg_path=None, use_default=False):
+        if use_default:
+            self.config_values = self.open_default_config()
+            return
+
         path = Path(cfg_path or CONFIG_PATH).expanduser()
 
         try:
@@ -39,12 +47,16 @@ class Config:
             with open(path / CONFIG_NAME) as config_file:
                 self.config_values = load(config_file)
 
-            self.opened_successfully = True
-        except PermissionError:
-            # Cannot create config file, use default config
+            backup_config = self.open_default_config()
 
-            with open('src/config/default_config.json') as config_file:
-                self.config_values = load(config_file)
+            for prop in backup_config:
+                if not prop in self.config_values:
+                    self.config_values[prop] = backup_config[prop]
+
+            self.opened_successfully = True
+        except (PermissionError, JSONDecodeError):
+            # Cannot create config file, use default config
+            self.config_values = self.open_default_config()
 
     def save_config(self, cfg_path=None):
         if not self.opened_successfully:
