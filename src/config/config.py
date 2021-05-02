@@ -60,7 +60,7 @@ class Config:
 
     def save_config(self, cfg_path=None):
         if not self.opened_successfully:
-            raise Exception('Unable to save settings: opened in read-only mode')
+            return
 
         path = Path(cfg_path or CONFIG_PATH).expanduser() / CONFIG_NAME
 

@@ -4,15 +4,11 @@ from json import loads
 from datetime import datetime
 from pyfakefs import fake_filesystem_unittest
 
-from stores.project_store import (
-    project_store
-)
+from stores.project_store import project_store
 from models.project import Project
 from config.config import config
 from db.db_connection import database
 from utils.filesystem import file_system
-
-# todo: move initialization to setUp
 
 class ProjectStoreTest(fake_filesystem_unittest.TestCase):
     #
