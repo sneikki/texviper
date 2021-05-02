@@ -94,7 +94,7 @@ class ProjectStore:
         name = project_config['name']
 
         with open(path / name / 'projectrc.json', 'w') as out_file:
-            json.dump(project_config, out_file)
+            json.dump(project_config, out_file, indent=4)
 
     def add_resource(self, resource, project_id):
         project_config = self.open_config(project_id)
@@ -161,6 +161,16 @@ class ProjectStore:
             lambda p: Project(p[1], p[2], p[0], p[3]),
             projects
         )) if projects else []
+
+    def get_resources(self, project_id):
+        project_config = self.open_config(project_id)
+
+        return list(
+            map(
+                lambda res: resource_store.create(res['name'], res['path'], res['type'], res['resource_id']),
+                project_config['resources']
+            )
+        )
 
     #
     #   Private

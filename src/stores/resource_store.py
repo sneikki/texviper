@@ -3,7 +3,7 @@ from models.resource import Resource
 class ResourceStore:
     
     def create(self, name, path, resource_type, resource_id=None):
-        return Resource(resource_id, name, path, resource_type)
+        return Resource(name, path, resource_type, resource_id)
 
     def find_all_in_project(self, project_id):
         pass
