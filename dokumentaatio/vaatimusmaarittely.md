@@ -29,7 +29,7 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 
 * käyttäjä voi luoda uuden projektin **[tehty]**
 * käyttäjä voi tarkastella olemassaolevia projekteja **[tehty]**
-* käyttäjä voi avata olemassaolevan projektin
+* käyttäjä voi avata olemassaolevan projektin **[tehty]**
 * käyttjä voi poistaa olemassaolevan projektin **[tehty]**
 
 ### Projektin luominen
@@ -38,9 +38,9 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 
 ### Projekti
 
-* käyttäjä voi muokata Latex-lähdekoodia
+* käyttäjä voi muokata Latex-lähdekoodia **[tehty]**
 * käyttäjä voi lisätä, uudelleennimetä tai poistaa Latex-lähdekooditiedostoja
-* käyttäjä voi muokata projektin asetuksia
+* käyttäjä voi muokata projektin asetuksia **[tehty]**
 * käyttäjä voi lisätä ja poistaa projektista tiedostoja **[tehty]**
 * käyttäjän muokatessa lähdekoodia sovellus päivittää esikatselunäkymän automaattisesti
 
