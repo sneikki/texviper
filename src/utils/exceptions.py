@@ -12,3 +12,6 @@ class ProjectExistsError(Exception):
 
 class InvalidValueError(Exception):
     pass
+
+class BuildError(Exception):
+    pass

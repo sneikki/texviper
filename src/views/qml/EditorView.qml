@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import QtQuick.Controls.Styles 1.4
+import QtWebEngine 1.1
 import 'components'
 
 SplitView {
@@ -43,6 +44,14 @@ SplitView {
                 break
             }
         }
+    }
+
+    function get_open_resource_contents() {
+        return resourcePanel.children[resourcePanel.currentIndex].get_source()
+    }
+
+    function get_open_resource_id() {
+        return resourcePanel.children[resourcePanel.currentIndex].resource_id
     }
 
     Item {
@@ -114,11 +123,26 @@ SplitView {
 
         SplitView.minimumWidth: 300
         SplitView.preferredWidth: (parent.width - 200) / 2
+
+        WebEngineView {
+            id: webview
+            anchors.fill: parent
+            settings.pluginsEnabled: true
+        }
+
+        Button {
+            text: 'Update'
+            onClicked: {
+                var url = project_view.get_url(project_id)
+                if (url) {
+                    webview.url = url
+                }
+            }
+        }
     }
 
     handle: Rectangle {
-        implicitWidth: 4
+        implicitWidth: 6
         color: SplitHandle.pressed ? '#eee' : '#ddd'
     }
-
 }

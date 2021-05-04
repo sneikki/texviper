@@ -173,6 +173,16 @@ class ProjectStore:
             )
         )
 
+    def get_resource_by_id(self, resource_id, project_id):
+        resources = project_store.get_resources(project_id)
+        
+        return [resource for resource in resources if resource.resource_id == resource_id][0]
+
+    def get_root_resource(self, project_id):
+        project_config = self.open_config(project_id)
+
+        return project_config['root']
+
     #
     #   Private
     #

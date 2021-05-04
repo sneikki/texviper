@@ -43,7 +43,10 @@ Item {
 
             Menu {
                 title: 'Project'
-                Action { text: 'Build' }
+                Action {
+                    text: 'Build'
+                    onTriggered: project_view.build_project()
+                }
                 Action { text: 'Export' }
             }
         }

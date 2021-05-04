@@ -8,6 +8,10 @@ ScrollView {
     clip: true
     height: parent ? parent.height : 0
 
+    function get_source() {
+        return editTemplateDialogContent.text
+    }
+
     TextEdit {
         objectName: 'editTemplateDialogContent'
         id: editTemplateDialogContent

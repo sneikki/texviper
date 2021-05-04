@@ -15,6 +15,7 @@ class ProjectView(View):
         self.project_stack = self.root.findChild(QObject, 'projectStack')
         self.project_view = self.root.findChild(QObject, 'projectView')
         self.tab_bar = self.root.findChild(QObject, 'projectsTab')
+        self.pdf_url = None
 
         self.components = {
             'editor_view': QQmlComponent(self.engine, QUrl('src/views/qml/EditorView.qml')),
@@ -91,7 +92,11 @@ class ProjectView(View):
 
     @Slot()
     def save_resource(self):
-        pass
+        editor = self.project_stack.find_editor(self.current)
+
+        source = editor.get_open_resource_contents()
+        resource_id = editor.get_open_resource_id()
+        project_controller.write_resource(resource_id, self.current, source)
 
     @Slot()
     def save_project(self):
@@ -119,3 +124,14 @@ class ProjectView(View):
             self.show_project(self.current)
         else:
             self.current = None
+        self.pdf_url = None
+
+    @Slot(str, result=str)
+    def get_url(self, project_id):
+        return str(self.pdf_url) if self.pdf_url else ''
+
+    @Slot()
+    def build_project(self):
+        # self.show_pdf()
+        if self.current:
+            self.pdf_url = project_controller.build_project(self.current)

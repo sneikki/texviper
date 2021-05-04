@@ -1,9 +1,12 @@
+import subprocess
+import threading
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor as Pool
 
 from models.project import Project
 from models.resource import Resource
 from stores.project_store import project_store
-from utils.exceptions import ProjectExistsError, InvalidValueError
+from utils.exceptions import ProjectExistsError, InvalidValueError, BuildError
 from config.config import config
 from utils.filesystem import file_system
 
@@ -102,13 +105,19 @@ class ProjectController:
         return project
 
     def read_resource(self, resource_id, project_id):
-        print(project_id, "fjkldsjflsdjflkdsjflkj")
         resources = project_store.get_resources(project_id)
+        
         resource = [
             resource for resource in resources if resource.resource_id == resource_id][0]
         project = project_store.find_by_id(project_id)
         path = Path(project[2]) / project[1] / resource.path / resource.name
         return path.read_text()
+
+    def write_resource(self, resource_id, project_id, source):
+        resource = project_store.get_resource_by_id(resource_id, project_id)
+        project = project_store.find_by_id(project_id)
+        path = Path(project[2]) / project[1] / resource.path / resource.name
+        path.write_text(source)
 
     def get_resources(self, project_id):
         return project_store.get_resources(project_id)
@@ -122,5 +131,41 @@ class ProjectController:
 
         project_store.delete_one(project_id)
 
+
+    def build_project(self, project_id):
+        """ Builds a PDF file from source code
+
+        Args:
+            project_id (string): id of the project to build
+        """
+        root_name = project_store.get_root_resource(project_id)
+        if not root_name:
+            raise BuildError('Root resource missing')
+
+        root_resource = list(
+            filter(lambda res: res.name == root_name,
+                project_store.get_resources(project_id)
+            )
+        )[0]
+
+        project = self.get_project_by_id(project_id)
+        resource_path = Path(project.path).expanduser() / project.name / root_resource.name
+
+        result = subprocess.Popen(['pdflatex', '-halt-on-error', root_resource.name], cwd=str(Path(project.path).expanduser() / project.name),
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        return Path(project.path).expanduser() / project.name / 'main.pdf'
+
+        # def popen_callback(cb, *args, **kwargs):
+        #     def run(cb, args, kwargs):
+        #         proc = subprocess.Popen(*args, **kwargs)
+        #         proc.wait()
+        #         cb()
+        #         return
+
+        #     thread = threading.Thread(target=run, args=(cb, args, kwargs))
+        #     thread.start()
+        #     return thread
+
+        # popen_callback(callback, ['pdflatex', root_resource.name], cwd=str(Path(project.path).expanduser() / project.name))
 
 project_controller = ProjectController()
