@@ -4,6 +4,6 @@
     "default_project_path": "~/.texviper/projects",
     "default_template_path": "~/.texviper/templates",
     "root_filename": "main.tex",
-    "accent_color": "purple",
+    "accent_color": "teal",
     "editor_font": "Source Code Pro"
 }

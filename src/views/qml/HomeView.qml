@@ -95,7 +95,8 @@ Item {
         text: 'Confirm project removal'
         standardButtons: StandardButton.Cancel | StandardButton.Yes
         onYes: {
-            home_view.remove_confirmed()
+            var id = home_view.remove_confirmed()
+            project_view.close_project(id)
         }
     }
 

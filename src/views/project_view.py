@@ -108,21 +108,23 @@ class ProjectView(View):
         pass
 
     @Slot()
-    def close_project(self):
+    def close_project(self, project_id=None):
         if len(self.open_projects) == 0:
             return
 
-        print(self.current)
-        editor = self.project_stack.find_editor(self.current)
+        if not project_id:
+            project_id = self.current
+
+        editor = self.project_stack.find_editor(project_id)
         editor.deleteLater()
 
         # Remove tab
-        tab = self.tabs[self.current]
+        tab = self.tabs[project_id]
         tab.deleteLater()
-        self.tabs[self.current] = None
+        self.tabs[project_id] = None
 
         self.open_projects = list(
-            filter(lambda p: p.project_id != self.current, self.open_projects))
+            filter(lambda p: p.project_id != project_id, self.open_projects))
 
         if len(self.open_projects) >= 1:
             self.current = self.open_projects[-1].project_id

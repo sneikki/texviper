@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.11
+import QtQuick.Controls.Material 2.12
 
 ApplicationWindow {
     id: window
@@ -10,8 +11,11 @@ ApplicationWindow {
     minimumHeight: 540
     visible: true
     color: 'white'
-
     title: qsTr('Texviper')
+
+    function set_accent(accent) {
+        Material.accent = accent
+    }
 
     TabBar {
             id: menu

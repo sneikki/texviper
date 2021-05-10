@@ -82,12 +82,14 @@ class HomeView(View):
         child.setProperty(
             'text', f'Do you want to remove project {project.name}?')
 
-    @Slot()
+    @Slot(result=str)
     def remove_confirmed(self):
         project_controller.remove_project(self.project_to_remove)
 
         child = self.root.findChild(QQuickItem, self.project_to_remove)
         child.deleteLater()
+
+        return self.project_to_remove
 
     @Slot()
     def load_templates(self):
