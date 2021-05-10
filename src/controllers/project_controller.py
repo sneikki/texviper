@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor as Pool
 from models.project import Project
 from models.resource import Resource
 from stores.project_store import project_store
+from controllers.template_controller import template_controller
 from utils.exceptions import ProjectExistsError, InvalidValueError, BuildError
 from config.config import config
 from utils.filesystem import file_system
@@ -15,7 +16,7 @@ class ProjectController:
     """ Handles logical operations for projects
     """
 
-    def create_project(self, name, path):
+    def create_project(self, name, path, template_name=None):
         """ Creates a new project and saves it to database and file system
 
         Args:
@@ -33,12 +34,20 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
-        self.add_resource(config.get_value('root_filename'), '.', 'tex', project.project_id, Path(
+        root = self.add_resource(config.get_value('root_filename'), '.', 'tex', project.project_id, Path(
             project.path).expanduser() / project.name, True)
         self.add_resource('projectrc.json', '.', 'config', project.project_id, Path(
             project.path).expanduser() / 'projectrc.json')
         project_store.set_root_file(config.get_value(
             'root_filename'), project.project_id)
+
+        if template_name:
+            print("hu")
+            templates = template_controller.get_templates()
+            template = list(filter(lambda t: t.name == template_name, templates))[0]
+
+            source = template_controller.get_source(template.template_id)
+            self.write_resource(root.resource_id, project.project_id, source)
 
         return project
 
@@ -52,6 +61,8 @@ class ProjectController:
         if create and not file_system.file_exists(full_path):
             file_system.create_directory(Path(project_path) / path)
             file_system.create_file(full_path)
+
+        return resource
 
     def remove_resource(self, resource_id, project_id):
         project_store.remove_resource(resource_id, project_id)

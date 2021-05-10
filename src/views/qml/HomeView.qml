@@ -35,7 +35,10 @@ Item {
 
                 Button {
                     text: qsTr('Create new project')
-                    onClicked: create_project_dialog_popup.open()
+                    onClicked: {
+                        home_view.load_templates()
+                        create_project_dialog_popup.open()
+                    }
                 }
         }
     }
@@ -73,7 +76,7 @@ Item {
     Popup {
         id: create_project_dialog_popup
         width: 400
-        height: 270
+        height: 350
         x: Math.round((window.width - width) / 2)
         y: Math.round((window.height - height) / 2)
         padding: 20
@@ -88,11 +91,20 @@ Item {
     MessageDialog {
         id: confirmRemovalDialog
         objectName: 'confirmRemovalDialog'
-        title: "Remove project"
-        text: "Confirm project removal"
+        title: 'Remove project'
+        text: 'Confirm project removal'
         standardButtons: StandardButton.Cancel | StandardButton.Yes
         onYes: {
             home_view.remove_confirmed()
+        }
+    }
+
+    MessageDialog {
+        id: errorDialog
+        objectName: 'errorDialog'
+        standardButtons: StandardButton.Ok
+        onAccepted: {
+            errorDialog.close()
         }
     }
 }

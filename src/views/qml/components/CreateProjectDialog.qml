@@ -34,6 +34,27 @@ Rectangle {
                 }
             }
 
+            Column {
+                width: parent.width
+                spacing: 5
+
+                Text {
+                    width: parent.width
+                    text: 'Template'
+                }
+
+                ComboBox {
+                    id: templateDropdown
+                    objectName: 'templateDropdown'
+                    width: parent.width
+                    model: []
+
+                    function set_model(m) {
+                        model = m
+                    }
+                }
+            }
+
             Row {
                 spacing: 20
                 Button {
@@ -46,9 +67,10 @@ Rectangle {
                     width: 170
                     text: 'Create'
                     onClicked: {
-                        home_view.create_project_clicked(name_field.text, path_field.text)
+                        home_view.create_project_clicked(name_field.text, path_field.text, templateDropdown.currentText)
                         name_field.text = ''
                         path_field.text = ''
+                        templateDropdown.currentIndex = 0
                         create_project_dialog_popup.close()
                     }
                 }

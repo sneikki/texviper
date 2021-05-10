@@ -2,9 +2,11 @@ import dateutil.parser
 from PySide2.QtCore import QObject, Slot, QUrl
 from PySide2.QtQml import QQmlComponent
 from PySide2.QtQuick import QQuickItem
+from PySide2.QtWidgets import QComboBox
 
 from views.view import View
 from controllers.project_controller import project_controller
+from controllers.template_controller import template_controller
 from utils.exceptions import (
     DirectoryNotEmptyError, InvalidValueError, ProjectExistsError
 )
@@ -39,21 +41,25 @@ class HomeView(View):
     def timestamp_to_date(self, timestamp):
         return str(dateutil.parser.isoparse(timestamp).date())
 
-    @Slot(str, str)
-    def create_project_clicked(self, name, path):
+    @Slot(str, str, str)
+    def create_project_clicked(self, name, path, template_name):
         try:
-            project = project_controller.create_project(name, path)
+            project = project_controller.create_project(name, path, template_name)
             self.add_project(project)
         except InvalidValueError as err:
-            print(err)
+            self.show_error('Project creation failed', str(err))
         except DirectoryNotEmptyError:
-            print('Unable to create project: directory not empty')
+            self.show_error('Project creation failed', 'Directory not empty')
         except ProjectExistsError:
-            print('Unable to create project: project exists')
+            self.show_error('Project creation failed', 'Project exists')
         except PermissionError:
-            print('Unable to create project: permission denied')
-        else:
-            print('Project created')
+            self.show_error('Project creation failed', 'Permission denied')
+
+    def show_error(self, title, message):
+        error_dialog = self.root.findChild(QObject, 'errorDialog')
+        error_dialog.setProperty('title', title)
+        error_dialog.setProperty('text', message)
+        error_dialog.setProperty('visible', True)
 
     @Slot()
     def import_project_clicked(self):
@@ -82,3 +88,10 @@ class HomeView(View):
 
         child = self.root.findChild(QQuickItem, self.project_to_remove)
         child.deleteLater()
+
+    @Slot()
+    def load_templates(self):
+        templates = template_controller.get_template_names()
+
+        dropdown = self.root.findChild(QObject, 'templateDropdown')
+        dropdown.set_model([''] + templates)

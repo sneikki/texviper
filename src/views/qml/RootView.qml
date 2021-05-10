@@ -75,5 +75,10 @@ ApplicationWindow {
         TemplateView {
             
         }
+
+        function set_current(current) {
+            currentIndex = current
+            menu.currentIndex = current
+        }
     }
 }

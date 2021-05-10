@@ -29,6 +29,9 @@ class ProjectView(View):
 
     @Slot(str)
     def open_project(self, project_id):
+        windows_layout = self.root.findChild(QObject, 'windowsLayout')
+        windows_layout.set_current(1)
+        
         if self.is_project_open(project_id):
             return
 
@@ -40,6 +43,8 @@ class ProjectView(View):
         self.load_resources(project_id)
 
         self.project_view.setProperty('projectCount', len(self.open_projects))
+        
+        
         if not self.current:
             self.current = project_id
 
