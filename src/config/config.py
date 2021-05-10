@@ -1,11 +1,18 @@
+import os
 from json import dumps, dump, load, JSONDecodeError
 from pathlib import Path
 from shutil import copyfile
+from dotenv import load_dotenv
 
 from utils.filesystem import file_system
 
-CONFIG_PATH = '~/.texviper'
-CONFIG_NAME = 'config.json'
+try:
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+except FileNotFoundError:
+    pass
+
+CONFIG_PATH = os.getenv('CONFIG_PATH')
+CONFIG_NAME = os.getenv('CONFIG_NAME')
 
 class Config:
     def __init__(self):
