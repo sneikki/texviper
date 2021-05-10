@@ -1,9 +1,9 @@
-from PySide2.QtCore import QObject, Slot, QUrl
+from PySide2.QtCore import QObject, Slot, QUrl, QThread
 from PySide2.QtQml import QQmlComponent
 
 from views.view import View
 from controllers.project_controller import project_controller
-
+from views.build_thread import BuildThread
 
 class ProjectView(View):
     def __init__(self, engine):
@@ -137,8 +137,13 @@ class ProjectView(View):
     def get_url(self, project_id):
         return str(self.pdf_url) if self.pdf_url else ''
 
+    def refresh(self, url):
+        editor = self.project_stack.find_editor(self.current)
+        editor.update_preview(url)
+
     @Slot()
     def build_project(self):
-        # self.show_pdf()
         if self.current:
-            self.pdf_url = project_controller.build_project(self.current)
+            build_ctx = project_controller.build_project(self.current)
+            self.build_thread = BuildThread(build_ctx[0], lambda: self.refresh(build_ctx[1]))
+            self.build_thread.start()

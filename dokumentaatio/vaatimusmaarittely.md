@@ -42,7 +42,7 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 * käyttäjä voi lisätä, uudelleennimetä tai poistaa Latex-lähdekooditiedostoja
 * käyttäjä voi muokata projektin asetuksia **[tehty]**
 * käyttäjä voi lisätä ja poistaa projektista tiedostoja **[tehty]**
-* käyttäjän muokatessa lähdekoodia sovellus päivittää esikatselunäkymän automaattisesti
+* käyttäjän ajaessa projektin sovellus päivittää esikatselunäkymän automaattisesti **[tehty]**
 
 ### Sovellusasetukset
 

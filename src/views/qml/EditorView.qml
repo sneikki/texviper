@@ -54,6 +54,10 @@ SplitView {
         return resourcePanel.children[resourcePanel.currentIndex].resource_id
     }
 
+    function update_preview(url) {
+        webview.url = url
+    }
+
     Item {
         id: resources
 
@@ -128,16 +132,6 @@ SplitView {
             id: webview
             anchors.fill: parent
             settings.pluginsEnabled: true
-        }
-
-        Button {
-            text: 'Update'
-            onClicked: {
-                var url = project_view.get_url(project_id)
-                if (url) {
-                    webview.url = url
-                }
-            }
         }
     }
 

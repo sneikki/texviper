@@ -45,6 +45,7 @@ Item {
                 title: 'Project'
                 Action {
                     text: 'Build'
+                    shortcut: 'Ctrl+B'
                     onTriggered: project_view.build_project()
                 }
                 Action { text: 'Export' }

@@ -10,6 +10,7 @@ from controllers.template_controller import template_controller
 from utils.exceptions import ProjectExistsError, InvalidValueError, BuildError
 from config.config import config
 from utils.filesystem import file_system
+from PySide2.QtCore import QThread
 
 
 class ProjectController:
@@ -160,23 +161,13 @@ class ProjectController:
         )[0]
 
         project = self.get_project_by_id(project_id)
-        resource_path = Path(project.path).expanduser() / project.name / root_resource.name
 
-        result = subprocess.Popen(['pdflatex', '-halt-on-error', root_resource.name], cwd=str(Path(project.path).expanduser() / project.name),
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        return Path(project.path).expanduser() / project.name / 'main.pdf'
+        return (
+            lambda: self._build_pdf(root_resource.name, str(Path(project.path).expanduser() / project.name)),
+            str(Path(project.path).expanduser() / project.name / 'main.pdf')
+        )
 
-        # def popen_callback(cb, *args, **kwargs):
-        #     def run(cb, args, kwargs):
-        #         proc = subprocess.Popen(*args, **kwargs)
-        #         proc.wait()
-        #         cb()
-        #         return
-
-        #     thread = threading.Thread(target=run, args=(cb, args, kwargs))
-        #     thread.start()
-        #     return thread
-
-        # popen_callback(callback, ['pdflatex', root_resource.name], cwd=str(Path(project.path).expanduser() / project.name))
+    def _build_pdf(self, name, path):
+        subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path)
 
 project_controller = ProjectController()
