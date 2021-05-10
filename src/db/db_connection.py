@@ -6,13 +6,22 @@ from config.config import config
 from utils.literal import literals
 from utils.exceptions import DatabaseConnectionError
 
-
 class Database:
     def __init__(self):
         self.connection = None
         self.cursor = None
 
     def connect(self, path=None):
+        """ Tries to connect to a database file
+
+        Args:
+            path (string, optional): Path of the databse file.
+                Defaults to default database path.
+
+        Raises:
+            DatabaseConnectionError: Raised if connecting to database
+                file does not succeed.
+        """
         db_path = Path(config.get_value('db_path')).expanduser()
         db_name = config.get_value('db_name')
 
@@ -32,32 +41,51 @@ class Database:
                 f'''{literals['database_connection_failed']}: {full_path}''') from err
 
     def close(self):
+        """ Closes the database connection
+        """
         if self.connection:
             self.connection.close()
 
     def execute(self, query):
+        """ Execytes a single query
+
+            Args:
+                query (string): String containing the query
+        """
         self.cursor.execute(query)
 
     def execute_script(self, script):
+        """ Executes sql queries in a file
+
+            Args:
+                script (str): File name of the script
+        """
         self.cursor.executescript(script)
 
     def begin(self):
+        """ Begins a transaction
+        """
         self.cursor.execute('begin')
 
     def commit(self):
+        """ Commits a transaction
+        """
         self.connection.commit()
 
     def rollback(self):
+        """ Cancels a transaction
+        """
         self.connection.rollback()
 
     def fetch_all(self):
+        """ Fetches all tuples from a query
+        """
         return self.cursor.fetchall()
 
     def fetch_one(self):
+        """ Fetch one tuple from a query
+        """
         return self.cursor.fetchone()
-
-    def concatenate_fields(self, fields):
-        return ','.join(fields) if fields else '*'
 
 
 database = Database()

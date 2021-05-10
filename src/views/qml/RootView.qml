@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.11
 import QtQuick.Controls.Material 2.12
+import QtQuick.Dialogs 1.1
 
 ApplicationWindow {
     id: window
@@ -83,6 +84,15 @@ ApplicationWindow {
         function set_current(current) {
             currentIndex = current
             menu.currentIndex = current
+        }
+    }
+
+    MessageDialog {
+        id: errorDialog
+        objectName: 'errorDialog'
+        standardButtons: StandardButton.Ok
+        onAccepted: {
+            errorDialog.close()
         }
     }
 }

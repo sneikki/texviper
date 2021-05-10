@@ -6,8 +6,8 @@ from views.view import View
 from controllers.template_controller import template_controller
 from stores.template_store import template_store
 from utils.exceptions import InvalidValueError
+from utils.literal import get_literal
 from config.config import config
-
 
 class TemplateView(View):
     def __init__(self, engine):
@@ -36,17 +36,16 @@ class TemplateView(View):
 
     @Slot(str, str, str)
     def create_template_clicked(self, name, filename, path):
-
         try:
             template = template_controller.create_template(
                 name, filename, path, '')
             self.add_template(template)
         except PermissionError:
-            print('Unable to create template: permission denied')
+            self.show_error(get_literal('template_creation_failed'), get_literal('permission_denied'))
         except FileExistsError:
-            print('Unable to create template: template exists')
+            self.show_error(get_literal('template_already_exists'), get_literal('permission_denied'))
         except InvalidValueError as err:
-            print(err)
+            self.show_error(get_literal('template_creation_failed'), str(err))
 
     @Slot(str)
     def remove_template(self, template_id):

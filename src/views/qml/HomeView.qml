@@ -99,13 +99,4 @@ Item {
             project_view.close_project(id)
         }
     }
-
-    MessageDialog {
-        id: errorDialog
-        objectName: 'errorDialog'
-        standardButtons: StandardButton.Ok
-        onAccepted: {
-            errorDialog.close()
-        }
-    }
 }

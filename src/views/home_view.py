@@ -10,6 +10,7 @@ from utils.exceptions import (
     DirectoryNotEmptyError, InvalidValueError, ProjectExistsError
 )
 from config.config import config
+from utils.literal import get_literal
 
 
 class HomeView(View):
@@ -48,19 +49,13 @@ class HomeView(View):
                 name, path, template_name)
             self.add_project(project)
         except InvalidValueError as err:
-            self.show_error('Project creation failed', str(err))
+            self.show_error(get_literal('project_creation_failed'), str(err))
         except DirectoryNotEmptyError:
-            self.show_error('Project creation failed', 'Directory not empty')
+            self.show_error(get_literal('project_creation_failed'), get_literal('dir_not_empty'))
         except ProjectExistsError:
-            self.show_error('Project creation failed', 'Project exists')
+            self.show_error(get_literal('project_creation_failed'), get_literal('projects_already_exists'))
         except PermissionError:
-            self.show_error('Project creation failed', 'Permission denied')
-
-    def show_error(self, title, message):
-        error_dialog = self.root.findChild(QObject, 'errorDialog')
-        error_dialog.setProperty('title', title)
-        error_dialog.setProperty('text', message)
-        error_dialog.setProperty('visible', True)
+            self.show_error(get_literal('project_creation_failed'), get_literal('permission_denied'))
 
     @Slot()
     def import_project_clicked(self):

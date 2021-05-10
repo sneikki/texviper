@@ -6,3 +6,9 @@ class View(QObject):
 
         self.engine = engine
         self.root = self.engine.rootObjects()[0]
+
+    def show_error(self, title, message):
+        error_dialog = self.root.findChild(QObject, 'errorDialog')
+        error_dialog.setProperty('title', title)
+        error_dialog.setProperty('text', message)
+        error_dialog.setProperty('visible', True)

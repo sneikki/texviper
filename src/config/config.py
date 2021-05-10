@@ -7,13 +7,22 @@ from utils.filesystem import file_system
 CONFIG_PATH = '~/.texviper'
 CONFIG_NAME = 'config.json'
 
-
 class Config:
     def __init__(self):
         self.config_values = dict()
         self.opened_successfully = False
 
     def create_project_config(self, project_id, name):
+        """ Creates a dictionary representing project configuration
+
+            Args:
+                project_id (string): Project id to be insterted into config
+                name (string): Project name to be inserted into config
+        
+            Returns:
+                dict: Dictionary representing the project configuration
+        """
+
         project_config = dict()
 
         project_config['name'] = name
@@ -22,16 +31,42 @@ class Config:
         return dumps(project_config)
 
     def get_value(self, name):
+        """ Returns a single value from configuration
+
+            Args:
+                name (string): Name of the property to query
+
+            Returns:
+                any: Value from the configuration
+        """
         return self.config_values[name]
 
     def set_value(self, name, value):
+        """ Sets a single value to configuration
+
+            Args:
+                name (string): Name of the property to set
+                value (any): Value of the property
+        """
         self.config_values[name] = value
 
     def open_default_config(self):
+        """ Opens the default configuration
+
+            Returns:
+                dict: Dictionary representing the default
+                        configuration
+        """
         with open('src/config/default_config.json') as default_config:
             return load(default_config)
 
     def open_config(self, cfg_path=None, use_default=False):
+        """ Opens a custom configuration from path
+
+        Args:
+            cfg_path (str, optional): Custom path. Defaults to None.
+            use_default (bool, optional): Use default configuration. Defaults to False.
+        """
         if use_default:
             self.config_values = self.open_default_config()
             return
@@ -59,6 +94,11 @@ class Config:
             self.config_values = self.open_default_config()
 
     def save_config(self, cfg_path=None):
+        """ Save configuration
+
+        Args:
+            cfg_path (str, optional): Path to save the config. Defaults to None.
+        """
         if not self.opened_successfully:
             return
 
