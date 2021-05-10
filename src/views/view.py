@@ -1,6 +1,5 @@
 from PySide2.QtCore import QObject
 
-
 class View(QObject):
     def __init__(self, engine):
         super().__init__()

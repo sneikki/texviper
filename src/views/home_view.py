@@ -1,8 +1,7 @@
 import dateutil.parser
-from PySide2.QtCore import QObject, Slot, QUrl
+from PySide2.QtCore import QObject, Slot
 from PySide2.QtQml import QQmlComponent
 from PySide2.QtQuick import QQuickItem
-from PySide2.QtWidgets import QComboBox
 
 from views.view import View
 from controllers.project_controller import project_controller
@@ -20,6 +19,7 @@ class HomeView(View):
         self.component = QQmlComponent(self.engine)
         self.component.loadUrl('src/views/qml/components/PreviewCard.qml')
         self.projects_list = self.root.findChild(QQuickItem, 'projects')
+        self.project_to_remove = None
         self.load_projects()
 
     def load_projects(self):
@@ -44,7 +44,8 @@ class HomeView(View):
     @Slot(str, str, str)
     def create_project_clicked(self, name, path, template_name):
         try:
-            project = project_controller.create_project(name, path, template_name)
+            project = project_controller.create_project(
+                name, path, template_name)
             self.add_project(project)
         except InvalidValueError as err:
             self.show_error('Project creation failed', str(err))

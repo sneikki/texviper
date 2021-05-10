@@ -21,7 +21,7 @@ ScrollView {
         font.pixelSize: 12
         wrapMode: Text.WrapAnywhere
         selectionColor: '#9b9b9b'
-        font.family: 'Source Code Pro'
+        font.family: project_view.get_font()
         padding: 25
         selectByMouse: true
     }

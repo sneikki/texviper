@@ -1,9 +1,10 @@
-from PySide2.QtCore import QObject, Slot, QUrl, QThread
+from PySide2.QtCore import QObject, Slot, QUrl
 from PySide2.QtQml import QQmlComponent
 
 from views.view import View
-from controllers.project_controller import project_controller
 from views.build_thread import BuildThread
+from controllers.project_controller import project_controller
+from config.config import config
 
 class ProjectView(View):
     def __init__(self, engine):
@@ -15,12 +16,15 @@ class ProjectView(View):
         self.project_stack = self.root.findChild(QObject, 'projectStack')
         self.project_view = self.root.findChild(QObject, 'projectView')
         self.tab_bar = self.root.findChild(QObject, 'projectsTab')
-        self.pdf_url = None
+        self.build_thread = None
 
         self.components = {
-            'editor_view': QQmlComponent(self.engine, QUrl('src/views/qml/EditorView.qml')),
-            'project_tab': QQmlComponent(self.engine, QUrl('src/views/qml/components/ProjectTab.qml')),
-            'resource_entry': QQmlComponent(self.engine, QUrl('src/views/qml/components/ResourceEntry.qml'))
+            'editor_view': QQmlComponent(self.engine,
+                QUrl('src/views/qml/EditorView.qml')),
+            'project_tab': QQmlComponent(self.engine,
+                QUrl('src/views/qml/components/ProjectTab.qml')),
+            'resource_entry': QQmlComponent(self.engine,
+                QUrl('src/views/qml/components/ResourceEntry.qml'))
         }
 
     def is_project_open(self, project_id):
@@ -31,7 +35,7 @@ class ProjectView(View):
     def open_project(self, project_id):
         windows_layout = self.root.findChild(QObject, 'windowsLayout')
         windows_layout.set_current(1)
-        
+
         if self.is_project_open(project_id):
             return
 
@@ -43,8 +47,7 @@ class ProjectView(View):
         self.load_resources(project_id)
 
         self.project_view.setProperty('projectCount', len(self.open_projects))
-        
-        
+
         if not self.current:
             self.current = project_id
 
@@ -131,11 +134,6 @@ class ProjectView(View):
             self.show_project(self.current)
         else:
             self.current = None
-        self.pdf_url = None
-
-    @Slot(str, result=str)
-    def get_url(self, project_id):
-        return str(self.pdf_url) if self.pdf_url else ''
 
     def refresh(self, url):
         editor = self.project_stack.find_editor(self.current)
@@ -145,5 +143,10 @@ class ProjectView(View):
     def build_project(self):
         if self.current:
             build_ctx = project_controller.build_project(self.current)
-            self.build_thread = BuildThread(build_ctx[0], lambda: self.refresh(build_ctx[1]))
+            self.build_thread = BuildThread(
+                build_ctx[0], lambda: self.refresh(build_ctx[1]))
             self.build_thread.start()
+
+    @Slot(result=str)
+    def get_font(self):
+        return config.get_value('editor_font')

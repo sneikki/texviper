@@ -53,6 +53,8 @@ class TemplateStore:
             full_path = Path(template.path).expanduser() / template.filename
             return full_path.read_text()
 
+        return None
+
     def write(self, template_id, source):
         template = self.find_by_id(template_id)
         self._write(template, source)

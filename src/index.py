@@ -1,5 +1,3 @@
-import sys
-
 from app.gui_application import GuiApplication
 
 if __name__ == '__main__':

@@ -1,17 +1,13 @@
 import subprocess
-import threading
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor as Pool
 
 from models.project import Project
 from models.resource import Resource
-from stores.project_store import project_store
 from controllers.template_controller import template_controller
+from stores.project_store import project_store
 from utils.exceptions import ProjectExistsError, InvalidValueError, BuildError
-from config.config import config
 from utils.filesystem import file_system
-from PySide2.QtCore import QThread
-
+from config.config import config
 
 class ProjectController:
     """ Handles logical operations for projects
@@ -35,15 +31,14 @@ class ProjectController:
         project = Project(name, path)
 
         project_store.create(project)
-        root = self.add_resource(config.get_value('root_filename'), '.', 'tex', project.project_id, Path(
-            project.path).expanduser() / project.name, True)
+        root = self.add_resource(config.get_value('root_filename'), '.', 'tex',
+            project.project_id, Path(project.path).expanduser() / project.name, True)
         self.add_resource('projectrc.json', '.', 'config', project.project_id, Path(
             project.path).expanduser() / 'projectrc.json')
         project_store.set_root_file(config.get_value(
             'root_filename'), project.project_id)
 
         if template_name:
-            print("hu")
             templates = template_controller.get_templates()
             template = list(filter(lambda t: t.name == template_name, templates))[0]
 
@@ -52,7 +47,6 @@ class ProjectController:
 
         return project
 
-    # _todo: error handling
     def add_resource(self, name, path, resource_type, project_id, project_path, create=False):
         resource = Resource(name, path, resource_type)
 
@@ -118,7 +112,7 @@ class ProjectController:
 
     def read_resource(self, resource_id, project_id):
         resources = project_store.get_resources(project_id)
-        
+
         resource = [
             resource for resource in resources if resource.resource_id == resource_id][0]
         project = project_store.find_by_id(project_id)
@@ -163,11 +157,12 @@ class ProjectController:
         project = self.get_project_by_id(project_id)
 
         return (
-            lambda: self._build_pdf(root_resource.name, str(Path(project.path).expanduser() / project.name)),
+            lambda: self._build_pdf(root_resource.name,
+                str(Path(project.path).expanduser() / project.name)),
             str(Path(project.path).expanduser() / project.name / 'main.pdf')
         )
 
     def _build_pdf(self, name, path):
-        subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path)
+        subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path, check=True)
 
 project_controller = ProjectController()

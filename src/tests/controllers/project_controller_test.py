@@ -1,10 +1,8 @@
-from pathlib import Path
 from pyfakefs import fake_filesystem_unittest
 
 from controllers.project_controller import project_controller
 from config.config import config
 from db.db_connection import database
-from utils.filesystem import file_system
 from utils.exceptions import ProjectExistsError
 
 

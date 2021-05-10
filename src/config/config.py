@@ -2,7 +2,6 @@ from json import dumps, dump, load, JSONDecodeError
 from pathlib import Path
 from shutil import copyfile
 
-from utils.literal import literals
 from utils.filesystem import file_system
 
 CONFIG_PATH = '~/.texviper'

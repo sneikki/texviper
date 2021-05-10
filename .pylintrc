@@ -591,3 +591,7 @@ min-public-methods=0
 # "BaseException, Exception".
 overgeneral-exceptions=BaseException,
                        Exception
+
+# Pylint does not load any C extensions, so PySide2 must be excluded
+# so pylint won't complain about missing modules.
+extension-pkg-whitelist=PySide2

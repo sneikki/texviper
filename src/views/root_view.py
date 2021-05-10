@@ -1,5 +1,3 @@
-from PySide2.QtCore import Slot, QObject
-
 from views.view import View
 from config.config import config
 

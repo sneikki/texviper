@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from pyfakefs import fake_filesystem_unittest
 

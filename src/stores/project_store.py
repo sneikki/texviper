@@ -5,10 +5,8 @@ from sqlite3 import IntegrityError, OperationalError
 from models.project import Project
 from db.db_connection import database
 from config.config import config
-from utils.exceptions import DirectoryNotEmptyError
 from utils.filesystem import file_system
 from stores.resource_store import resource_store
-
 
 class ProjectStore:
     #
@@ -88,7 +86,7 @@ class ProjectStore:
                 project_config = json.load(config_file)
                 return project_config
         else:
-            pass
+            return None
 
     def save_config(self, project_config):
         path = Path(self.find_one(f'''name="{project_config['name']}"''').path)
@@ -175,7 +173,7 @@ class ProjectStore:
 
     def get_resource_by_id(self, resource_id, project_id):
         resources = project_store.get_resources(project_id)
-        
+
         return [resource for resource in resources if resource.resource_id == resource_id][0]
 
     def get_root_resource(self, project_id):

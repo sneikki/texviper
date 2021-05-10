@@ -24,9 +24,9 @@ class SettingsView(View):
         self.load_setting('editorFont', 'text',
                           config.get_value('editor_font'))
 
-    def load_setting(self, setting_name, property, value):
+    def load_setting(self, setting_name, prop, value):
         setting = self.root.findChild(QObject, setting_name)
-        setting.setProperty(property, value)
+        setting.setProperty(prop, value)
 
     @Slot()
     def save_settings(self):
