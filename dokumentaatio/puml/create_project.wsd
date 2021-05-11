@@ -1,0 +1,38 @@
+@startuml
+
+skinparam monochrome true
+
+User -> HomeView: click create button
+activate HomeView
+
+HomeView -> ProjectController: create_project()
+activate ProjectController
+
+ProjectController -> ProjectStore: exists()
+activate ProjectStore
+
+ProjectStore --> ProjectController:
+deactivate ProjectStore
+
+ProjectController -> ProjectStore: create()
+activate ProjectStore
+
+ProjectStore -> ProjectStore: _create_record()
+ProjectStore -> ProjectStore: _write()
+
+ProjectStore --> ProjectController:
+deactivate ProjectStore
+
+ProjectController -> ProjectController: add_resource('main.tex')
+ProjectController -> ProjectController: add_resource('projectrc.json')
+ProjectController -> ProjectController: set_root_file('main.tex')
+
+ProjectController --> HomeView
+deactivate ProjectStore
+
+HomeView -> HomeView: add_project()
+
+HomeView --> User:
+deactivate HomeView
+
+@enduml

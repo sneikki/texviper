@@ -1,0 +1,25 @@
+@startuml
+
+skinparam monochrome true
+
+(*) --> HomeView
+
+if "Luo projekti" then
+    -->[Onnistui] ProjectView
+else
+    -->[Epäonnistui] HomeView
+endif
+
+HomeView -->[Avaa projekti] ProjectView
+ProjectView --> HomeView
+ProjectView -->[Sulje projekti] ProjectView
+
+HomeView --> SettingsView
+HomeView --> TemplateView
+SettingsView --> HomeView
+TemplateView --> HomeView
+
+TemplateView -->[Luo/muokkaa/poista malli] TemplateView
+SettingsView -->[Tallenna] SettingsView
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+
+skinparam monochrome true
+
+package views {
+}
+
+package controllers {
+}
+
+package stores {
+}
+
+package models {
+}
+
+package utils {
+}
+
+package config {
+}
+
+package db {
+
+}
+
+views ..> controllers
+controllers ..> stores
+controllers ..> models
+stores ..> models
+
+views ..> utils
+views ..> config
+
+controllers ..> utils
+controllers ..> config
+
+stores ..> config
+stores ..> db
+
+@enduml

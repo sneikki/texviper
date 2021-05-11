@@ -1,0 +1,29 @@
+@startuml
+
+skinparam monochrome true
+
+class Project {
+    +name
+    +path
+    +project_id
+    +last_modified
+}
+
+class Resource {
+    +name
+    +type
+    +path
+    +resource_id
+}
+
+class Template {
+    +name
+    +filename
+    +path
+    +template_id
+}
+
+Project "1" -- "*" Resource
+Project -- Template : käyttää >
+
+@enduml

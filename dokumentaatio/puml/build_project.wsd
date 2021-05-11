@@ -1,0 +1,40 @@
+@startuml
+
+skinparam monochrome true
+
+User -> ProjectView: click 'Build' or enter Ctrl+B
+activate ProjectView
+
+ProjectView -> ProjectController: build_project()
+activate ProjectController
+
+ProjectController -> ProjectStore: get_root_resource()
+activate ProjectStore
+
+ProjectStore --> ProjectController:
+deactivate ProjectStore
+
+ProjectController -> ProjectController: get_resources()
+ProjectController -> ProjectController: get_project_by_id()
+
+ProjectController --> ProjectView:
+deactivate ProjectController
+
+ProjectView -> BuildThread: run()
+activate BuildThread
+
+BuildThread -> ProjectController: _build_pdf()
+activate ProjectController
+
+ProjectController --> BuildThread:
+deactivate ProjectController
+
+BuildThread --> ProjectView:
+deactivate BuildThread
+
+ProjectView -> ProjectView: refresh()
+
+ProjectView --> User:
+deactivate ProjectView
+
+@enduml

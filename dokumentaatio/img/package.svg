@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="404px" preserveAspectRatio="none" style="width:405px;height:404px;" version="1.1" viewBox="0 0 405 404" width="405px" zoomAndPan="magnify"><defs><filter height="300%" id="f1u5xq8ablgphf" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="286.5,6,338.5,6,345.5,28.2969,352.5,28.2969,352.5,58.5938,286.5,58.5938,286.5,6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="286.5" x2="345.5" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="46" x="290.5" y="20.9951">views</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="160.5,119,252.5,119,259.5,141.2969,266.5,141.2969,266.5,171.5938,160.5,171.5938,160.5,119" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="160.5" x2="259.5" y1="141.2969" y2="141.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86" x="164.5" y="133.9951">controllers</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="111,232,168,232,175,254.2969,182,254.2969,182,284.5938,111,284.5938,111,232" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="111" x2="175" y1="254.2969" y2="254.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="51" x="115" y="246.9951">stores</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="16,345,79,345,86,367.2969,93,367.2969,93,397.5938,16,397.5938,16,345" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="86" y1="367.2969" y2="367.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="57" x="20" y="359.9951">models</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="289,232,328,232,335,254.2969,342,254.2969,342,284.5938,289,284.5938,289,232" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="289" x2="335" y1="254.2969" y2="254.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="33" x="293" y="246.9951">utils</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="204,345,259,345,266,367.2969,273,367.2969,273,397.5938,204,397.5938,204,345" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="204" x2="266" y1="367.2969" y2="367.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="49" x="208" y="359.9951">config</text><polygon fill="#FFFFFF" filter="url(#f1u5xq8ablgphf)" points="128.5,345,154.5,345,161.5,367.2969,168.5,367.2969,168.5,397.5938,128.5,397.5938,128.5,345" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="128.5" x2="161.5" y1="367.2969" y2="367.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="20" x="132.5" y="359.9951">db</text><!--MD5=[fd4dadafb7dfafd89665a9151015bafc]
+link views to controllers--><path d="M294.92,59.24 C278.99,75.92 258.22,97.67 241.64,115.04 " fill="none" id="views-to-controllers" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="237.95,118.89,247.0616,115.1511,241.4061,115.2768,241.2804,109.6213,237.95,118.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[6b6b96ca9d50842a596363310c7f87d2]
+link controllers to stores--><path d="M197.96,172.24 C187.98,188.78 174.99,210.31 164.55,227.6 " fill="none" id="controllers-to-stores" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="161.96,231.89,170.0343,226.2503,164.543,227.6088,163.1844,222.1175,161.96,231.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[6bfde5656e7ece32836aeea1e9e8a819]
+link controllers to models--><path d="M162.53,172.18 C138.41,186.71 111.09,207 93.5,232 C70.67,264.45 61.16,309.94 57.22,339.8 " fill="none" id="controllers-to-models" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="56.6,344.82,61.7004,336.3947,57.229,339.8597,53.7639,335.3883,56.6,344.82" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[af761c6378621c7d950d1e13b626c1c1]
+link stores to models--><path d="M125.16,285.24 C111.34,301.92 93.31,323.67 78.92,341.04 " fill="none" id="stores-to-models" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="75.72,344.89,84.5433,340.5141,78.9111,341.0407,78.3845,335.4084,75.72,344.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[c715d9d06a5b48b18073f584f2eda123]
+link views to utils--><path d="M319.04,59.2 C318.3,100.61 316.85,181.96 316.05,226.51 " fill="none" id="views-to-utils" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="315.96,231.76,320.1137,222.8299,316.0457,226.7607,312.1149,222.6928,315.96,231.76" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[969c4177664d0b2f64197a67a73e6917]
+link views to config--><path d="M333.25,59.03 C356.74,106.38 398.43,209.82 359.5,285 C342.5,317.82 306.47,340.73 278.12,354.52 " fill="none" id="views-to-config" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="273.28,356.82,283.1258,356.5741,277.7969,354.6759,279.6952,349.347,273.28,356.82" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[6f9c0d64785ab74b82c4046b29bf6c60]
+link controllers to utils--><path d="M237.16,172.24 C252.48,188.92 272.47,210.67 288.42,228.04 " fill="none" id="controllers-to-utils" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="291.97,231.89,288.8273,222.556,288.5875,228.2078,282.9357,227.968,291.97,231.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[41b8c0b3a5644cb59138c4b10caf010b]
+link controllers to config--><path d="M216.37,172.2 C221,213.69 230.11,295.29 235.07,339.78 " fill="none" id="controllers-to-config" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="235.63,344.76,238.6294,335.379,235.0872,339.7895,230.6767,336.2474,235.63,344.76" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[33f2faeabac86c2defe06aa43ea41d76]
+link stores to config--><path d="M167.84,285.24 C181.66,301.92 199.69,323.67 214.08,341.04 " fill="none" id="stores-to-config" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="217.28,344.89,214.6155,335.4084,214.0889,341.0407,208.4567,340.5141,217.28,344.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[6e8e5141185ec4b72682b80e0be47509]
+link stores to db--><path d="M146.96,285.24 C147.26,301.5 147.64,322.58 147.95,339.71 " fill="none" id="stores-to-db" style="stroke:#383838;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#383838" points="148.04,344.89,151.8592,335.8118,147.94,339.891,143.8608,335.9718,148.04,344.89" style="stroke:#383838;stroke-width:1.0;"/><!--MD5=[7ba858a3bda838809858ddfe242975ee]
+@startuml
+
+skinparam monochrome true
+
+package views {
+}
+
+package controllers {
+}
+
+package stores {
+}
+
+package models {
+}
+
+package utils {
+}
+
+package config {
+}
+
+package db {
+
+}
+
+views ..> controllers
+controllers ..> stores
+controllers ..> models
+stores ..> models
+
+views ..> utils
+views ..> config
+
+controllers ..> utils
+controllers ..> config
+
+stores ..> config
+stores ..> db
+
+@enduml
+
+PlantUML version 1.2021.4(Sun Apr 04 11:49:39 EEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

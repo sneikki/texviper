@@ -1,0 +1,29 @@
+@startuml
+
+skinparam monochrome true
+
+User -> ProjectView: click save or enter Ctrl+S
+activate ProjectView
+
+ProjectView -> ProjectController: write_resource()
+activate ProjectController
+
+ProjectController -> ProjectStore: get_resource_by_id()
+activate ProjectStore
+
+ProjectStore --> ProjectController: Resource
+deactivate ProjectStore
+
+ProjectController -> ProjectStore: find_by_id()
+activate ProjectStore
+
+ProjectStore --> ProjectController: Project
+deactivate ProjectStore
+
+ProjectController --> ProjectView:
+deactivate ProjectController
+
+ProjectView --> User:
+deactivate ProjectView
+
+@enduml
