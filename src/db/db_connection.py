@@ -87,5 +87,7 @@ class Database:
         """
         return self.cursor.fetchone()
 
+    def concatenate_fields(self, fields):
+        return ','.join(fields) if fields else '*'
 
 database = Database()
