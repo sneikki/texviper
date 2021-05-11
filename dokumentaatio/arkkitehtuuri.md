@@ -37,13 +37,15 @@ Ohjelman mallien välisiä riippuvuuksia kuvaa seuraava kaavio:
 
 ## Data
 
-Ohjelma tallentaa ja lukee dataa sekä tietokannasta että tiedostoista.
+Ohjelma tallentaa ja lukee dataa sekä tietokannasta että tiedostoista. MVCS-mallin mukaisesti _stores_-pakkauksen luokat vastaavat datan tallennuksesta ja lukemisesta.
 
 ### Tiedostot
 
 Ohjelman sekä projektien konfiguraatiot talletetaan tiedostoihin. Kaikki tiedostot ovat JSON-muodossa.
 
 Ohjelman konfiguraatio on oletuksena ```config.json```-tiedostossa avain-arvopareina. Konfiguraatiotiedoston nimi ja polku on määritelty ```.env```-tiedostossa.
+
+Projektin konfiguraatio sijaitsee projektin juureen luotavassa ```projectrc.json```-tiedostossa. Konfiguraatio määrittelee projektin juuritiedoston sekä resurssit. 
 
 ### Tietokanta
 
@@ -56,6 +58,8 @@ Tietokannassa on kaksi taulua: projektit (Projects) ja mallit (Templates). Tieto
 <img src="img/create_project.svg" />
 
 ### Resurssin tallennus
+
+Yksittäisen resurssin tallentaminen projektin sisällä etenee seuraavasti:
 
 <img src="img/save_resource.svg" />
 
