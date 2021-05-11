@@ -16,6 +16,8 @@
 | 25.4.         | 5             | gui:n toteutusta + korjaus ongelmiin poluissa             |
 | 26.4.         | 2             | gui:n toteutusta + vieweille yhteinen base class          |
 | 27.4.         | 5             | gui:n toteutusta + konfiguraatiopolun korjaus testeihin   |
-| 31.4.-2.2.    | 15            | gui:n toteutusta                                          |
-| 3.2.          | 2             | tiedostojen tallennus ja projektin buildaus               |
-| **Yht.**      | **41**        |                                                           |
+| 31.4.-2.5.    | 15            | gui:n toteutusta                                          |
+| 3.5.          | 2             | tiedostojen tallennus ja projektin buildaus               |
+| 10.5.         | 2             | virheilmoitusten lisääminen + parantelua                  |
+| 11.5.         | 4             | refaktorointia ja dokumentaation päivitystä               |
+| **Yht.**      | **64**        |                                                           |
