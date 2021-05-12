@@ -112,9 +112,9 @@ class ProjectStore:
     def remove_resource(self, resource_id, project_id):
         pass
 
-    def find_by_id(self, project_id, fields=None):
+    def find_by_id(self, project_id):
         query = f'''
-            select {database.concatenate_fields(fields)} from Projects
+            select * from Projects
             where project_id="{project_id}"
         '''
         database.execute(query)
