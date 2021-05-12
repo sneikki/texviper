@@ -1,0 +1,32 @@
+@startuml
+
+skinparam monochrome true
+
+class ProjectController {
+
+}
+
+class TemplateController {
+
+}
+
+class ProjectStore {
+
+}
+
+class TemplateStore {
+
+}
+
+class ResourceStore {
+
+}
+
+hide members
+
+ProjectController ..> ProjectStore
+TemplateController ..> TemplateStore
+ProjectController ..> TemplateController
+ProjectStore ..> ResourceStore
+
+@enduml
