@@ -35,6 +35,10 @@ Ohjelman mallien välisiä riippuvuuksia kuvaa seuraava kaavio:
 
 <img src="img/model.svg" />
 
+Logiikasta ja tallennuksesta vastaavien luokkien riippuvuuksia kuvaa seuraava kaavio:
+
+<img src="img/class_dep.svg" />
+
 ## Data
 
 Ohjelma tallentaa ja lukee dataa sekä tietokannasta että tiedostoista. MVCS-mallin mukaisesti _stores_-pakkauksen luokat vastaavat datan tallennuksesta ja lukemisesta.

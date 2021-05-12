@@ -48,6 +48,19 @@ class ProjectController:
         return project
 
     def add_resource(self, name, path, resource_type, project_id, project_path, create=False):
+        """ Adds a resource to project
+
+        Args:
+            name (str): Name of the resource
+            path (str): Path of the resource, relative to project
+            resource_type (str): Type of the resource. Either 'tex' or 'config'
+            project_id (str): Id of the project to which the resource will be added
+            project_path (str): Path of the project
+            create (bool, optional): Whether a file should be created to project. Defaults to False.
+
+        Returns:
+            Resource: created resource
+        """
         resource = Resource(name, path, resource_type)
 
         project_store.add_resource(resource, project_id)
@@ -60,6 +73,12 @@ class ProjectController:
         return resource
 
     def remove_resource(self, resource_id, project_id):
+        """ Removes a resource from project
+
+        Args:
+            resource_id (str): Id of the resource to remove
+            project_id (str): Id of the project that owns the resource
+        """
         project_store.remove_resource(resource_id, project_id)
 
     def get_project_names(self):
@@ -111,6 +130,15 @@ class ProjectController:
         return project
 
     def read_resource(self, resource_id, project_id):
+        """ Reads contents of a resource
+
+        Args:
+            resource_id (str): Id of the resource to read
+            project_id (str): Id of the project that owns the resource
+
+        Returns:
+            str: Contents of the resource
+        """
         resources = project_store.get_resources(project_id)
 
         resource = [
@@ -120,12 +148,27 @@ class ProjectController:
         return path.read_text()
 
     def write_resource(self, resource_id, project_id, source):
+        """ Writes text to a resource
+
+            Args:
+                resource_id (str): Id of the resource to write to
+                project_id (str): Id of the project that owns the resource
+                source (str): Source to write to the resource
+        """
         resource = project_store.get_resource_by_id(resource_id, project_id)
         project = project_store.find_by_id(project_id)
         path = Path(project[2]) / project[1] / resource.path / resource.name
         path.write_text(source)
 
     def get_resources(self, project_id):
+        """ Returns all resources in a project
+
+        Args:
+            project_id (str): Id of the project
+
+        Returns:
+            resources: List of resources
+        """
         return project_store.get_resources(project_id)
 
     def remove_project(self, project_id):
@@ -141,8 +184,12 @@ class ProjectController:
     def build_project(self, project_id):
         """ Builds a PDF file from source code
 
-        Args:
-            project_id (string): id of the project to build
+            Args:
+                project_id (string): id of the project to build
+
+            Returns:
+                context: Tuple containing a lambda that builds the pdf
+                    and path of the generated file
         """
         root_name = project_store.get_root_resource(project_id)
         if not root_name:
@@ -162,7 +209,17 @@ class ProjectController:
             str(Path(project.path).expanduser() / project.name / 'main.pdf')
         )
 
+    #
+    #   Private
+    #
+
     def _build_pdf(self, name, path):
+        """ Builds a pdf from a given file in given path
+
+        Args:
+            name (str): Name of the file
+            path (str): Path of the file
+        """
         subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path, check=True)
 
 project_controller = ProjectController()

@@ -60,6 +60,11 @@ class ProjectStore:
         return len(database.fetch_all()) > 0
 
     def delete_one(self, project_id):
+        """ Deletes a project by id
+
+        Args:
+            project_id (string): Id of the project to remove
+        """
 
         project = self.find_by_id(project_id)
 
@@ -74,10 +79,16 @@ class ProjectStore:
         if project:
             self._destruct_project(project[2], project[1])
 
-    def delete_many(self, project_ids):
-        pass
-
     def open_config(self, project_id):
+        """ Reads config file of a project
+
+        Args:
+            project_id (string): Id of the project
+
+        Returns:
+            config: Dictionary representing the config file. None if not found.
+        """
+
         project = self.find_one(f'''project_id="{project_id}"''')
 
         if project:
@@ -89,6 +100,11 @@ class ProjectStore:
             return None
 
     def save_config(self, project_config):
+        """ Writes configuration to config file
+
+            Args:
+                project_config (dict): Dictionary representing the configuration
+        """
         path = Path(self.find_one(f'''name="{project_config['name']}"''').path)
         name = project_config['name']
 
@@ -96,8 +112,14 @@ class ProjectStore:
             json.dump(project_config, out_file, indent=4)
 
     def add_resource(self, resource, project_id):
+        """ Adds a resource to a project
+
+            Args:
+                resource (Resource): Resource to add
+                project_id (string): Id of the project that owns the resource
+        """
+
         project_config = self.open_config(project_id)
-        # project_config = project_config['resources'] or []
         if not 'resources' in project_config:
             project_config['resources'] = []
         project_config['resources'].append(
@@ -105,14 +127,24 @@ class ProjectStore:
         self.save_config(project_config)
 
     def set_root_file(self, filename, project_id):
+        """ Sets the root file of a project
+
+            Args:
+                filename (string): File name of the root file
+                project_id (string): Id of the project
+        """
+
         project_config = self.open_config(project_id)
         project_config['root'] = filename
         self.save_config(project_config)
 
-    def remove_resource(self, resource_id, project_id):
-        pass
-
     def find_by_id(self, project_id):
+        """ Finds a project by id
+
+            Args:
+                project_id (string): Id of the project
+        """
+
         query = f'''
             select * from Projects
             where project_id="{project_id}"
@@ -161,6 +193,15 @@ class ProjectStore:
         )) if projects else []
 
     def get_resources(self, project_id):
+        """ Returns all resources of a project
+
+            Args:
+                project_id (string): Id of the project
+
+            Returns:
+                resources: List of the resources
+        """
+
         project_config = self.open_config(project_id)
 
         return list(
@@ -172,11 +213,30 @@ class ProjectStore:
         )
 
     def get_resource_by_id(self, resource_id, project_id):
+        """ Finds a resoure by id in a project
+
+            Args:
+                resource_id (string): Id of the resource to find
+                project_id (string): Id od the project that owns the resource
+        
+            Returns:
+                resource: The resource if found. None otherwise.
+        """
+
         resources = project_store.get_resources(project_id)
 
-        return [resource for resource in resources if resource.resource_id == resource_id][0]
+        return [resource for resource in resources if resource.resource_id == resource_id][0] or None
 
     def get_root_resource(self, project_id):
+        """ Returns root resource of a project
+
+            Args:
+                project_id (string): Id of the project
+
+            Returns:
+                string: File name of the root resource
+        """
+
         project_config = self.open_config(project_id)
 
         return project_config['root']

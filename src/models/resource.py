@@ -12,7 +12,6 @@ class Resource:
     """
 
     def __init__(self, name, path, resource_type, resource_id=None):
-
         self.resource_id = resource_id or str(uuid())
         self.name = name
         self.path = path
