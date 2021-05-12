@@ -16,6 +16,15 @@ SplitView {
         resourceList.children.push(item)
     }
 
+    function remove_resource(resource_id) {
+        for (var i = 0; i < resourceList.children.length; i++) {
+            if (resourceList.children[i].resource_id == resource_id) {
+                resourceList.children[i].destroy()
+                break
+            }
+        }
+    }
+
     function open_resource(name, source, resource_id) {
         var component = Qt.createComponent('components/EditPanel.qml')
         var item = component.createObject(null, { source, resource_id })
@@ -28,7 +37,6 @@ SplitView {
 
     function show_resource(resource_id) {
         for (var i = 0; i < resourcePanel.children.length; i++) {
-            
             if (resourcePanel.children[i].resource_id == resource_id) {       
                 resourcePanel.currentIndex = i
                 break
@@ -38,7 +46,6 @@ SplitView {
 
     function close_resource(resource_id) {
         for (var i = 0; i < resourcePanel.children.length; i++) {
-            
             if (resourcePanel.children[i].resource_id == resource_id) {       
                 resourcePanel.children[i].destroy()
                 break

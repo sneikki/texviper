@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
+import QtQuick.Dialogs 1.1
 import 'components'
 
 Item {
@@ -22,7 +23,9 @@ Item {
                 Action {
                     text: 'Add resource'
                     shortcut: StandardKey.New
-                    onTriggered: project_view.add_resource()
+                    onTriggered: {
+                        newResourceDialog.open()
+                    }
                 }
                 MenuSeparator { }
                 Action { 
@@ -101,18 +104,21 @@ Item {
         }
     }
 
-    // Component {
-    //     id: emptyProjectView
+    Dialog {
+        id: newResourceDialog
+        title: 'New resource'
+        standardButtons: StandardButton.Ok | StandardButton.Cancel
+        width: 400
+        anchors.centerIn: parent
 
-    //     Text {
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //         width: parent.width
-    //         height: parent.height
-    //         text: 'No projects open'
-    //         font.pixelSize: 32
-    //         color: '#a2a2a2'
-    //         font.bold: true
-    //     }
-    // }
+        TextField {
+            id: newResourceName
+            width: parent.width
+            placeholderText: 'Resource name'
+        }
+
+        onAccepted: {
+            project_view.add_resource(newResourceName.text)
+        }
+    }
 }

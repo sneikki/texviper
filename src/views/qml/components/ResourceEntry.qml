@@ -23,7 +23,24 @@ Rectangle {
         hoverEnabled: true
         onEntered: hover = true
         onExited: hover = false
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
 
         onDoubleClicked: project_view.open_resource(name, resource_id)
+        onClicked: {
+            if (mouse.button === Qt.RightButton) {
+                resourceMenu.popup()
+            }
+        }
+    }
+
+    Menu {
+        id: resourceMenu
+
+        MenuItem {
+            text: 'Remove'
+            onTriggered: {
+                project_view.remove_resource(resource_id)
+            }
+        }
     }
 }

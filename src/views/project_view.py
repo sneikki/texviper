@@ -1,3 +1,4 @@
+from pathlib import Path
 from PySide2.QtCore import QObject, Slot, QUrl
 from PySide2.QtQml import QQmlComponent
 
@@ -98,9 +99,23 @@ class ProjectView(View):
 
         editor.close_resource(resource_id)
 
-    @Slot()
-    def add_resource(self):
-        print('add resource')
+    @Slot(str)
+    def add_resource(self, name):
+        print(name.endswith(name))
+        file_name = name + '.tex' if not name.endswith('.tex') else name
+        project = project_controller.get_project_by_id(self.current)
+        resource = project_controller.add_resource(file_name, '.', 'tex', self.current, Path(project.path) / project.name, True)
+
+
+        editor = self.project_stack.find_editor(self.current)
+        editor.add_resource(resource.name, resource.resource_id)
+
+    @Slot(str)
+    def remove_resource(self, resource_id):
+        project_controller.remove_resource(resource_id, self.current) 
+        
+        editor = self.project_stack.find_editor(self.current)
+        editor.remove_resource(resource_id)
 
     @Slot()
     def save_resource(self):
