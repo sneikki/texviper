@@ -6,7 +6,8 @@ class BuildThread(QThread):
         super().__init__()
         self.target = target
         if callback:
-            self.finished.connect(callback)
+            self.finished.connect(lambda: callback(self.state))
 
     def run(self, *args, **kwargs):
-        self.target(*args, **kwargs)
+        self.state = self.target(*args, **kwargs)
+        

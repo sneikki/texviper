@@ -216,10 +216,14 @@ class ProjectController:
     def _build_pdf(self, name, path):
         """ Builds a pdf from a given file in given path
 
-        Args:
-            name (str): Name of the file
-            path (str): Path of the file
+            Args:
+                name (str): Name of the file
+                path (str): Path of the file
         """
-        subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path, check=True)
+        try:
+            subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path, check=True)
+        except subprocess.CalledProcessError:
+            return False
+        return True
 
 project_controller = ProjectController()

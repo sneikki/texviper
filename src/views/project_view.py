@@ -5,6 +5,7 @@ from views.view import View
 from views.build_thread import BuildThread
 from controllers.project_controller import project_controller
 from config.config import config
+from utils.exceptions import BuildError
 
 class ProjectView(View):
     def __init__(self, engine):
@@ -77,10 +78,13 @@ class ProjectView(View):
 
     @Slot(str, str)
     def open_resource(self, name, resource_id):
-        source = project_controller.read_resource(resource_id, self.current)
-        editor = self.project_stack.find_editor(self.current)
-
-        editor.open_resource(name, source, resource_id)
+        try:
+            source = project_controller.read_resource(resource_id, self.current)
+        except FileNotFoundError:
+            self.show_error('Resource missing', 'Could not open resource: file missing')
+        else:
+            editor = self.project_stack.find_editor(self.current)
+            editor.open_resource(name, source, resource_id)
 
     @Slot(str)
     def show_resource(self, resource_id):
@@ -135,16 +139,20 @@ class ProjectView(View):
         else:
             self.current = None
 
-    def refresh(self, url):
-        editor = self.project_stack.find_editor(self.current)
-        editor.update_preview(url)
+    def refresh(self, url, state):
+        if state:
+            editor = self.project_stack.find_editor(self.current)
+            editor.update_preview(url)
+        else:
+            self.show_error('Error', 'Compilation failed. No output generated.')
 
     @Slot()
     def build_project(self):
         if self.current:
             build_ctx = project_controller.build_project(self.current)
             self.build_thread = BuildThread(
-                build_ctx[0], lambda: self.refresh(build_ctx[1]))
+                build_ctx[0], lambda state: self.refresh(build_ctx[1], state)
+            )
             self.build_thread.start()
 
     @Slot(result=str)
