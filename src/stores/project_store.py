@@ -6,6 +6,7 @@ from models.project import Project
 from db.db_connection import database
 from config.config import config
 from utils.filesystem import file_system
+from utils.exceptions import InvalidResourceError
 from stores.resource_store import resource_store
 
 class ProjectStore:
@@ -94,7 +95,10 @@ class ProjectStore:
         if project:
             path = Path(project.path) / project.name / 'projectrc.json'
             with open(path) as config_file:
-                project_config = json.load(config_file)
+                try:
+                    project_config = json.load(config_file)
+                except json.JSONDecodeError:
+                    raise InvalidResourceError
                 return project_config
         else:
             return None

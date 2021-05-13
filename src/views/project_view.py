@@ -6,7 +6,7 @@ from views.view import View
 from views.build_thread import BuildThread
 from controllers.project_controller import project_controller
 from config.config import config
-from utils.exceptions import BuildError
+from utils.exceptions import BuildError, InvalidResourceError
 
 class ProjectView(View):
     def __init__(self, engine):
@@ -46,12 +46,15 @@ class ProjectView(View):
 
         self.create_editor_view(project)
 
-        self.load_resources(project_id)
-
-        self.project_view.setProperty('projectCount', len(self.open_projects))
-
-        if not self.current:
-            self.current = project_id
+        try:
+            self.load_resources(project_id)
+        except InvalidResourceError:
+            self.show_error('Error', 'Failed to open project: invalid resource')
+            self.close_project(project.project_id)
+        else:
+            self.project_view.setProperty('projectCount', len(self.open_projects))
+            if not self.current:
+                self.current = project_id
 
     def load_resources(self, project_id):
         resources = project_controller.get_resources(project_id)

@@ -12,3 +12,6 @@ class InvalidValueError(Exception):
 
 class BuildError(Exception):
     pass
+
+class InvalidResourceError(Exception):
+    pass
