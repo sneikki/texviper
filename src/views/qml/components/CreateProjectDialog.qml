@@ -25,12 +25,8 @@ Rectangle {
                 spacing: 10
                 TextField {
                     id: path_field
-                    width: 250
+                    width: parent.width
                     placeholderText: 'Path'
-                }
-                Button {
-                    width: 100
-                    text: 'Browse'
                 }
             }
 

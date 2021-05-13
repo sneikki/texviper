@@ -12,7 +12,7 @@ Rectangle {
         anchors.fill: parent
         verticalAlignment: Text.AlignVCenter
         anchors.leftMargin: 10
-
+        elide: Text.ElideRight
         text: name
     }
 

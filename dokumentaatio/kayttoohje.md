@@ -46,6 +46,14 @@ Paneelien kokoa voi säätää raahamalla niiden välissä olevia kahvoja.
 
 Resurssin voi avata tuplaklikkaamalla sen nimeä resurssipaneelissa.
 
+### Resurssin luominen
+
+Uuden resurssin voi luoda valitsemalla _File_-valikosta _Add resource_ ja syöttämällä resurssin nimen.
+
+### Resurssin poistaminen
+
+Resurssin voi poistaa projektista klikkaamalla sitä hiiren oikealla napilla ja valitsemalla avautuvasta valikosta _Remove_.
+
 ### Tallennus
 
 Resurssin voi tallentaa joko valitsemalla _File_-valikosta _Save resource_ tai painamlla näppäinyhdistelmää Ctrl+S.

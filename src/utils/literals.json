@@ -9,5 +9,9 @@
     "database_creation_failed": "Failed to open database file",
     "default_config": "Failed to open config file. Using default config",
     "template_creation_failed": "Failed to create template",
-    "template_already_exists": "Template already exists"
+    "template_already_exists": "Template already exists",
+    "failed_to_open_project": "Failed to open project",
+    "invalid_resource": "Invalid resource",
+    "file_missing": "File missing",
+    "failed_to_open_resource": "Failed to open resource"
 }

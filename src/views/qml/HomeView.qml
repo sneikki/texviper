@@ -28,10 +28,6 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 36
                 spacing: 36
-                Button {
-                    text: qsTr('Import project')
-                    onClicked: home_view.import_project_clicked()
-                }
 
                 Button {
                     text: qsTr('Create new project')

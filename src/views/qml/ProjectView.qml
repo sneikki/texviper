@@ -24,23 +24,23 @@ Item {
                     text: 'Add resource'
                     shortcut: StandardKey.New
                     onTriggered: {
-                        newResourceDialog.open()
+                        projectCount > 0 && newResourceDialog.open()
                     }
                 }
                 MenuSeparator { }
                 Action { 
                     text: 'Save resource'
                     shortcut: StandardKey.Save
-                    onTriggered: project_view.save_resource()
+                    onTriggered: project_count > 0 && project_view.save_resource()
                 }
                 Action {
                     text: 'Save project'
-                    onTriggered: project_view.save_project()
+                    onTriggered: project_count > 0 && project_view.save_project()
                 }
                 MenuSeparator { }
                 Action {
                     text: 'Close project'
-                    onTriggered: project_view.close_project()    
+                    onTriggered: project_count > 0 && project_view.close_project()    
                 }
             }
 
@@ -49,9 +49,8 @@ Item {
                 Action {
                     text: 'Build'
                     shortcut: 'Ctrl+B'
-                    onTriggered: project_view.build_project()
+                    onTriggered: project_count > 0 && project_view.build_project()
                 }
-                Action { text: 'Export' }
             }
         }
 

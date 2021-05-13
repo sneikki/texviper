@@ -28,12 +28,8 @@ Item {
             spacing: 10
             TextField {
                 id: pathField
-                width: 250
+                width: parent.width
                 placeholderText: 'Path'
-            }
-            Button {
-                width: 100
-                text: 'Browse'
             }
         }
 

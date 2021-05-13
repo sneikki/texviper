@@ -57,10 +57,6 @@ class HomeView(View):
         except PermissionError:
             self.show_error(get_literal('project_creation_failed'), get_literal('permission_denied'))
 
-    @Slot()
-    def import_project_clicked(self):
-        print('import project')
-
     @Slot(result=str)
     def get_default_path(self):
         return config.get_value('default_project_path')
