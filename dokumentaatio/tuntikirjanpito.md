@@ -20,4 +20,6 @@
 | 3.5.          | 2             | tiedostojen tallennus ja projektin buildaus               |
 | 10.5.         | 2             | virheilmoitusten lisääminen + parantelua                  |
 | 11.5.         | 4             | refaktorointia ja dokumentaation päivitystä               |
-| **Yht.**      | **64**        |                                                           |
+| 12.5          | 2             | refaktorointia ja korjauksia                              |
+| 13.5.         | 2             | "                                                         |
+| **Yht.**      | **68**        |                                                           |
