@@ -89,3 +89,4 @@ class HomeView(View):
 
         dropdown = self.root.findChild(QObject, 'templateDropdown')
         dropdown.set_model([''] + templates)
+

@@ -3,6 +3,11 @@ import QtQuick.Controls 2.12
 
 Rectangle {
     color: 'white'
+    onVisibleChanged: {
+        if (visible) {
+            path_field.text = home_view.get_default_path()
+        }
+    }
 
     Item {
         Column {

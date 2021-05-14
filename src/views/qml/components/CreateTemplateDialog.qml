@@ -2,6 +2,12 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Item {
+    onVisibleChanged: {
+        if (visible) {
+            pathField.text = template_view.get_default_path()
+        }
+    }
+
     Column {
         width: 360
         spacing: 20
