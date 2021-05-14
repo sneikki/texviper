@@ -31,16 +31,16 @@ Item {
                 Action { 
                     text: 'Save resource'
                     shortcut: StandardKey.Save
-                    onTriggered: project_count > 0 && project_view.save_resource()
+                    onTriggered: projectCount > 0 && project_view.save_resource()
                 }
                 Action {
                     text: 'Save project'
-                    onTriggered: project_count > 0 && project_view.save_project()
+                    onTriggered: projectCount > 0 && project_view.save_project()
                 }
                 MenuSeparator { }
                 Action {
                     text: 'Close project'
-                    onTriggered: project_count > 0 && project_view.close_project()    
+                    onTriggered: projectCount > 0 && project_view.close_project()    
                 }
             }
 
@@ -49,7 +49,7 @@ Item {
                 Action {
                     text: 'Build'
                     shortcut: 'Ctrl+B'
-                    onTriggered: project_count > 0 && project_view.build_project()
+                    onTriggered: projectCount > 0 && project_view.build_project()
                 }
             }
         }
