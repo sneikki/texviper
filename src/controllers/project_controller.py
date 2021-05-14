@@ -70,6 +70,8 @@ class ProjectController:
             file_system.create_directory(Path(project_path) / path)
             file_system.create_file(full_path)
 
+        project_store.update_timestamp(project_id)
+
         return resource
 
     def remove_resource(self, resource_id, project_id):
@@ -80,6 +82,7 @@ class ProjectController:
             project_id (str): Id of the project that owns the resource
         """
         project_store.remove_resource(resource_id, project_id)
+        project_store.update_timestamp(project_id)
 
     def get_project_names(self):
         """ Returns list of names of all projects
@@ -159,6 +162,7 @@ class ProjectController:
         project = project_store.find_by_id(project_id)
         path = Path(project[2]) / project[1] / resource.path / resource.name
         path.write_text(source)
+        project_store.update_timestamp(project_id)
 
     def get_resources(self, project_id):
         """ Returns all resources in a project

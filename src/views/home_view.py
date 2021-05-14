@@ -57,7 +57,7 @@ class HomeView(View):
             datetime: Created datetime object
         """
 
-        return str(dateutil.parser.isoparse(timestamp).date())
+        return dateutil.parser.isoparse(timestamp).strftime('%m-%d-%Y %H:%M')
 
     @Slot(str, str, str)
     def create_project_clicked(self, name, path, template_name):

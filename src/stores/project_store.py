@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from pathlib import Path
 from sqlite3 import IntegrityError, OperationalError
 
@@ -129,6 +130,23 @@ class ProjectStore:
         project_config['resources'].append(
             resource_store.serialize(resource))
         self.save_config(project_config)
+
+    def update_timestamp(self, project_id, timestamp=str(datetime.now())):
+        """ Updates last_modified field of a project
+
+            Args:
+                project_id (string): Id of the projcet
+                timestamp (string, optional): Timestamp to set. Defaults to current time.
+        """
+
+        query = f'''
+            update Projects
+            set last_modified = "{timestamp}"
+            where project_id="{project_id}"
+        '''
+
+        database.execute(query)
+        database.commit()
 
     def remove_resource(self, resource_id, project_id):
         project_config = self.open_config(project_id)
