@@ -8,6 +8,7 @@ from config.config import config
 from db.db_connection import database
 from utils.filesystem import file_system
 
+
 class TemplateStoreTest(fake_filesystem_unittest.TestCase):
     #
     #   Setup
@@ -25,7 +26,8 @@ class TemplateStoreTest(fake_filesystem_unittest.TestCase):
         database.close()
 
     def test_create_creates_file(self):
-        template = Template('test_template', 'test_template.tex', '~/.texviper/templates')
+        template = Template(
+            'test_template', 'test_template.tex', '~/.texviper/templates')
         template_store.create(template, '')
 
         self.assertTrue(
@@ -33,7 +35,8 @@ class TemplateStoreTest(fake_filesystem_unittest.TestCase):
         )
 
     def test_create_inserts_to_database(self):
-        template = Template('test_template', 'test_template.tex', '~/.texviper/templates')
+        template = Template(
+            'test_template', 'test_template.tex', '~/.texviper/templates')
         template_store.create(template, '')
 
         database.execute(
@@ -44,7 +47,8 @@ class TemplateStoreTest(fake_filesystem_unittest.TestCase):
         self.assertEqual(len(result), 4)
 
     def test_delete_removes_file(self):
-        template = Template('test_template', 'test_template.tex', '~/.texviper/templates')
+        template = Template(
+            'test_template', 'test_template.tex', '~/.texviper/templates')
         template_store.create(template, '')
 
         template_store.delete_one(template.template_id)

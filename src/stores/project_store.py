@@ -10,6 +10,7 @@ from utils.filesystem import file_system
 from utils.exceptions import InvalidResourceError
 from stores.resource_store import resource_store
 
+
 class ProjectStore:
     #
     #   Public
@@ -95,12 +96,14 @@ class ProjectStore:
 
         if project:
             path = Path(project.path) / project.name / 'projectrc.json'
-            with open(path) as config_file:
-                try:
+            try:
+                with open(path) as config_file:
                     project_config = json.load(config_file)
-                except json.JSONDecodeError:
-                    raise InvalidResourceError
-                return project_config
+                    return project_config
+            except FileNotFoundError as err:
+                raise InvalidResourceError from err
+            except json.JSONDecodeError as err:
+                raise InvalidResourceError from err
         else:
             return None
 
@@ -150,7 +153,7 @@ class ProjectStore:
 
     def remove_resource(self, resource_id, project_id):
         project_config = self.open_config(project_id)
-                
+
         project_config['resources'] = list(
             filter(
                 lambda r: r['resource_id'] != resource_id,
@@ -252,14 +255,15 @@ class ProjectStore:
             Args:
                 resource_id (string): Id of the resource to find
                 project_id (string): Id od the project that owns the resource
-        
+
             Returns:
                 resource: The resource if found. None otherwise.
         """
 
         resources = project_store.get_resources(project_id)
 
-        return [resource for resource in resources if resource.resource_id == resource_id][0] or None
+        return [resource for resource in resources
+            if resource.resource_id == resource_id][0] or None
 
     def get_root_resource(self, project_id):
         """ Returns root resource of a project

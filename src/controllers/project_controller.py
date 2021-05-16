@@ -9,6 +9,7 @@ from utils.exceptions import ProjectExistsError, InvalidValueError, BuildError
 from utils.filesystem import file_system
 from config.config import config
 
+
 class ProjectController:
     """ Handles logical operations for projects
     """
@@ -40,7 +41,8 @@ class ProjectController:
 
         if template_name:
             templates = template_controller.get_templates()
-            template = list(filter(lambda t: t.name == template_name, templates))[0]
+            template = list(filter(lambda t: t.name ==
+                            template_name, templates))[0]
 
             source = template_controller.get_source(template.template_id)
             self.write_resource(root.resource_id, project.project_id, source)
@@ -184,7 +186,6 @@ class ProjectController:
 
         project_store.delete_one(project_id)
 
-
     def build_project(self, project_id):
         """ Builds a PDF file from source code
 
@@ -201,15 +202,15 @@ class ProjectController:
 
         root_resource = list(
             filter(lambda res: res.name == root_name,
-                project_store.get_resources(project_id)
-            )
+                   project_store.get_resources(project_id)
+                   )
         )[0]
 
         project = self.get_project_by_id(project_id)
 
         return (
             lambda: self._build_pdf(root_resource.name,
-                str(Path(project.path).expanduser() / project.name)),
+                                    str(Path(project.path).expanduser() / project.name)),
             str(Path(project.path).expanduser() / project.name / 'main.pdf')
         )
 
@@ -225,9 +226,11 @@ class ProjectController:
                 path (str): Path of the file
         """
         try:
-            subprocess.run(['pdflatex', '-halt-on-error', name], cwd=path, check=True)
+            subprocess.run(['pdflatex', '-halt-on-error', name],
+                           cwd=path, check=True)
         except subprocess.CalledProcessError:
             return False
         return True
+
 
 project_controller = ProjectController()

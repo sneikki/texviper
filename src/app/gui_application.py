@@ -16,7 +16,7 @@ from views.template_view import TemplateView
 
 class GuiApplication(Application):
     def __init__(self):
-
+        super().__init__()
         self.app = None
         self.engine = None
 

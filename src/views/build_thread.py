@@ -13,4 +13,3 @@ class BuildThread(QThread):
             self.state = self.target(*args, **kwargs)
         except FileNotFoundError:
             self.state = False
-

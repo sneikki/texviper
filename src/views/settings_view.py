@@ -40,7 +40,7 @@ class SettingsView(View):
         """
         setting = self.root.findChild(QObject, setting_name)
         return setting.property(prop)
-        
+
     @Slot()
     def save_settings(self):
         """ Called when save button is clicked. Writes the config values

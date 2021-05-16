@@ -32,8 +32,10 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
         project_controller.create_project('test_project', '.')
 
     def test_project_is_initialized_correctly_with_template(self):
-        template = template_controller.create_template('test template', 'test_template.tex', '~/.texviper/templates', 'test')
-        project_controller.create_project('test_project', '~/.texviper/projects', template.name)
+        template = template_controller.create_template(
+            'test template', 'test_template.tex', '~/.texviper/templates', 'test')
+        project_controller.create_project(
+            'test_project', '~/.texviper/projects', template.name)
 
         self.assertEqual(
             Path('~/.texviper/projects/test_project/main.tex').expanduser().read_text(),
@@ -74,9 +76,9 @@ class ProjectControllerTest(fake_filesystem_unittest.TestCase):
 
     def test_read_resource_works(self):
         template = template_controller.create_template('test template',
-            'test_template.tex', '~/.texviper/templates', 'test')
+                                                       'test_template.tex', '~/.texviper/templates', 'test')
         project = project_controller.create_project('test_project',
-            '~/.texviper/projects', template.name)
+                                                    '~/.texviper/projects', template.name)
         resource = project_controller.get_resources(project.project_id)[0]
 
         self.assertEqual(project_controller.read_resource(

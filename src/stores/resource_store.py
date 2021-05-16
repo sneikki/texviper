@@ -1,5 +1,6 @@
 from models.resource import Resource
 
+
 class ResourceStore:
     def create(self, name, path, resource_type, resource_id=None):
         """ Creates a new resource
@@ -27,6 +28,7 @@ class ResourceStore:
         """
 
         return {'resource_id': resource.resource_id, 'name': resource.name,
-            'path': resource.path, 'type': resource.type}
+                'path': resource.path, 'type': resource.type}
+
 
 resource_store = ResourceStore()

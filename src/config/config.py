@@ -7,12 +7,14 @@ from dotenv import load_dotenv
 from utils.filesystem import file_system
 
 try:
-    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+    load_dotenv(dotenv_path=os.path.join(
+        os.path.dirname(__file__), '..', '.env'))
 except FileNotFoundError:
     pass
 
 CONFIG_PATH = os.getenv('CONFIG_PATH')
 CONFIG_NAME = os.getenv('CONFIG_NAME')
+
 
 class Config:
     def __init__(self):
@@ -25,7 +27,7 @@ class Config:
             Args:
                 project_id (string): Project id to be insterted into config
                 name (string): Project name to be inserted into config
-        
+
             Returns:
                 dict: Dictionary representing the project configuration
         """

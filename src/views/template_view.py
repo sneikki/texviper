@@ -9,6 +9,7 @@ from utils.exceptions import InvalidValueError
 from utils.literal import get_literal
 from config.config import config
 
+
 class TemplateView(View):
     def __init__(self, engine):
         super().__init__(engine)
@@ -54,9 +55,11 @@ class TemplateView(View):
                 name, filename, path, '')
             self.add_template(template)
         except PermissionError:
-            self.show_error(get_literal('template_creation_failed'), get_literal('permission_denied'))
+            self.show_error(get_literal('template_creation_failed'),
+                            get_literal('permission_denied'))
         except FileExistsError:
-            self.show_error(get_literal('template_already_exists'), get_literal('permission_denied'))
+            self.show_error(get_literal('template_already_exists'),
+                            get_literal('permission_denied'))
         except InvalidValueError as err:
             self.show_error(get_literal('template_creation_failed'), str(err))
 

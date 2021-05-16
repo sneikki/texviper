@@ -46,7 +46,7 @@ class TemplateController:
 
     def get_templates(self):
         """ Returns a list of all templates
-        
+
             Returns:
                 templates: list of templates
         """

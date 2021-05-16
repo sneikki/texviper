@@ -9,6 +9,7 @@ from config.config import config
 from utils.exceptions import BuildError, InvalidResourceError
 from utils.literal import get_literal
 
+
 class ProjectView(View):
     def __init__(self, engine):
         super().__init__(engine)
@@ -23,11 +24,11 @@ class ProjectView(View):
 
         self.components = {
             'editor_view': QQmlComponent(self.engine,
-                QUrl('src/views/qml/EditorView.qml')),
+                                         QUrl('src/views/qml/EditorView.qml')),
             'project_tab': QQmlComponent(self.engine,
-                QUrl('src/views/qml/components/ProjectTab.qml')),
+                                         QUrl('src/views/qml/components/ProjectTab.qml')),
             'resource_entry': QQmlComponent(self.engine,
-                QUrl('src/views/qml/components/ResourceEntry.qml'))
+                                            QUrl('src/views/qml/components/ResourceEntry.qml'))
         }
 
     def is_project_open(self, project_id):
@@ -110,7 +111,8 @@ class ProjectView(View):
             )
             self.close_project(project.project_id)
         else:
-            self.project_view.setProperty('projectCount', len(self.open_projects))
+            self.project_view.setProperty(
+                'projectCount', len(self.open_projects))
             if not self.current:
                 self.current = project_id
 
@@ -135,7 +137,8 @@ class ProjectView(View):
                 resource_id (string): Id of the resource
         """
         try:
-            source = project_controller.read_resource(resource_id, self.current)
+            source = project_controller.read_resource(
+                resource_id, self.current)
         except FileNotFoundError:
             self.show_error(
                 'Error',
@@ -149,7 +152,7 @@ class ProjectView(View):
     def show_resource(self, resource_id):
         """ Changes an open resource to the currently
             open resource.
-        
+
             Args:
                 resource_id (string): Id of the resource
         """
@@ -176,7 +179,7 @@ class ProjectView(View):
         file_name = name + '.tex' if not name.endswith('.tex') else name
         project = project_controller.get_project_by_id(self.current)
         resource = project_controller.add_resource(file_name, '.', 'tex',
-            self.current, Path(project.path) / project.name, True)
+                                                   self.current, Path(project.path) / project.name, True)
 
         editor = self.find_editor(self.current)
         editor.add_resource(resource.name, resource.resource_id)
@@ -188,8 +191,8 @@ class ProjectView(View):
             Args:
                 resource_id (string): Id of the resource to remove
         """
-        project_controller.remove_resource(resource_id, self.current) 
-        
+        project_controller.remove_resource(resource_id, self.current)
+
         editor = self.find_editor(self.current)
         editor.remove_resource(resource_id)
 
@@ -216,7 +219,7 @@ class ProjectView(View):
 
         if not project_id:
             project_id = self.current
-        
+
         editor = self.find_editor(project_id)
         editor.deleteLater()
 
@@ -246,7 +249,8 @@ class ProjectView(View):
             editor = self.find_editor(self.current)
             editor.update_preview(url)
         else:
-            self.show_error('Error', 'Compilation failed. No output generated.')
+            self.show_error(
+                'Error', 'Compilation failed. No output generated.')
 
     @Slot()
     def build_project(self):

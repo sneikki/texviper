@@ -6,6 +6,7 @@ from config.config import config
 from utils.literal import literals
 from utils.exceptions import DatabaseConnectionError
 
+
 class Database:
     def __init__(self):
         self.connection = None
@@ -86,5 +87,6 @@ class Database:
         """ Fetch one tuple from a query
         """
         return self.cursor.fetchone()
+
 
 database = Database()

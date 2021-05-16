@@ -68,6 +68,7 @@ class HomeView(View):
             path (string): Path that user entered
             template_name (string): Template name
         """
+
         try:
             project = project_controller.create_project(
                 name, path, template_name)
@@ -75,11 +76,14 @@ class HomeView(View):
         except InvalidValueError as err:
             self.show_error(get_literal('project_creation_failed'), str(err))
         except DirectoryNotEmptyError:
-            self.show_error(get_literal('project_creation_failed'), get_literal('dir_not_empty'))
+            self.show_error(get_literal('project_creation_failed'),
+                            get_literal('dir_not_empty'))
         except ProjectExistsError:
-            self.show_error(get_literal('project_creation_failed'), get_literal('projects_already_exists'))
+            self.show_error(get_literal('project_creation_failed'),
+                            get_literal('projects_already_exists'))
         except PermissionError:
-            self.show_error(get_literal('project_creation_failed'), get_literal('permission_denied'))
+            self.show_error(get_literal('project_creation_failed'),
+                            get_literal('permission_denied'))
 
     @Slot(result=str)
     def get_default_path(self):
