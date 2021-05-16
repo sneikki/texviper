@@ -9,5 +9,8 @@ class BuildThread(QThread):
             self.finished.connect(lambda: callback(self.state))
 
     def run(self, *args, **kwargs):
-        self.state = self.target(*args, **kwargs)
-        
+        try:
+            self.state = self.target(*args, **kwargs)
+        except FileNotFoundError:
+            self.state = False
+
