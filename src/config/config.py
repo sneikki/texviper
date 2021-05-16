@@ -12,9 +12,8 @@ try:
 except FileNotFoundError:
     pass
 
-CONFIG_PATH = os.getenv('CONFIG_PATH')
-CONFIG_NAME = os.getenv('CONFIG_NAME')
-
+CONFIG_PATH = os.getenv('CONFIG_PATH') or '~/.texviper'
+CONFIG_NAME = os.getenv('CONFIG_NAME') or 'config.json'
 
 class Config:
     def __init__(self):
