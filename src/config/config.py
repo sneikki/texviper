@@ -7,9 +7,13 @@ from dotenv import load_dotenv
 from utils.filesystem import file_system
 
 try:
-    load_dotenv(dotenv_path=os.path.join(
-        os.path.dirname(__file__), '..', '.env'))
+    load_dotenv(
+        dotenv_path=os.path.join(
+            os.path.dirname(__file__), '..', '.env'
+        )
+    )
 except FileNotFoundError:
+    # Use default values
     pass
 
 CONFIG_PATH = os.getenv('CONFIG_PATH') or '~/.texviper'
