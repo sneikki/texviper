@@ -227,7 +227,8 @@ class ProjectController:
         """
         try:
             subprocess.run(['pdflatex', '-halt-on-error', name],
-                           cwd=path, check=True)
+                cwd=path, check=True, stdout=subprocess.DEVNULL, 
+                stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError:
             return False
         return True
