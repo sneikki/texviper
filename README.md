@@ -6,6 +6,10 @@
 
 [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](dokumentaatio/kayttoohje.md)
+
+[Testausdokumentti](dokumentaatio/testausdokumentti.md)
+
 [Työtuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 ## Asennus
