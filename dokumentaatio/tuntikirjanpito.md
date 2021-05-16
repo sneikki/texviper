@@ -23,5 +23,5 @@
 | 12.5          | 2             | refaktorointia ja korjauksia                              |
 | 13.5.         | 2             | "                                                         |
 | 14.4.         | 3             | oletuspolkujen ja timestampin toteutus                    |
-| 16.4.         | 2             | dokumentaation päivitystä ja projektin viimeistelyä       |
-| **Yht.**      | **73**        |                                                           |
+| 16.4.         | 4             | dokumentaation päivitystä ja projektin viimeistelyä       |
+| **Yht.**      | **75**        |                                                           |
