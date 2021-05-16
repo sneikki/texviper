@@ -5,9 +5,8 @@
 Kyseessä on Latex-editori, jolla voidaan helposti luoda ja muokata Latex-dokumentteja. Sovelluksessa voi luoda projekteja, joissa dokumentteja voi muokata. Sovellus hallinnoi projektit tiedostojärjestelmässä käyttäjän puolesta, joten projekteja on helppo muokata ja ylläpitääm vaikka ne koostuisivat useista tiedostoista. Lisäksi sovellus mahdollistaa projektikohtaisten asetusten määrittelyn.
 
 ## Käyttäjäroolit
-
 Sovelluksessa on yksi käyttäjärooli eli tavallinen käyttäjä. Käyttäjä hallinnoi sovellusta,
-ja käyttäjällä on oikeus suorittaa kaikki sovelluksen mahdollistamat toiminnot. Erillistä ylläpitäjän roolia ei siis ainakaan tässä vaiheessa ole.
+ja käyttäjällä on oikeus suorittaa kaikki sovelluksen mahdollistamat toiminnot. Erillistä ylläpitäjän roolia ei siis ole.
 
 ## Käyttöliittymä
 
@@ -15,7 +14,8 @@ Sovellus tarjoaa graafisen käyttöliittymän, joka muodostuu seuraavista näkym
 
 * Kotinäkymä: listaus olemassaolevista projekteista sekä uusien projektien luonti
 * Projektinäkymä: aktiivisen projektin editori- ja esikatselupaneeli, muut avoimet projektit välilehtinä
-* Asetukset: sovelluskohtaiset asetukset, kuten teema, templatet jne.
+* Asetukset: sovelluskohtaiset asetukset, kuten teema jne.
+* Mallit: olemassaolevat mallit sekä mallien hallunta
 
 Sovellus mahdollistaa useamman projektin avaamisen välilehtiin. Lisäksi projektin sisällä voi olla välilehdissä useampia lähdekooditiedostoja.
 
@@ -27,10 +27,10 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 
 ### Sovelluksen avauduttua
 
-* käyttäjä voi luoda uuden projektin **[tehty]**
-* käyttäjä voi tarkastella olemassaolevia projekteja **[tehty]**
-* käyttäjä voi avata olemassaolevan projektin **[tehty]**
-* käyttjä voi poistaa olemassaolevan projektin **[tehty]**
+* käyttäjä voi luoda uuden projektin
+* käyttäjä voi tarkastella olemassaolevia projekteja
+* käyttäjä voi avata olemassaolevan projektin
+* käyttjä voi poistaa olemassaolevan projektin
 
 ### Projektin luominen
 
@@ -38,21 +38,18 @@ Allaoleva kuva havainnollistaa karkeasti sovelluksen näkymiä ja navigaatiota n
 
 ### Projekti
 
-* käyttäjä voi muokata Latex-lähdekoodia **[tehty]**
-* käyttäjä voi lisätä, uudelleennimetä tai poistaa Latex-lähdekooditiedostoja
-* käyttäjä voi muokata projektin asetuksia **[tehty]**
-* käyttäjä voi lisätä ja poistaa projektista tiedostoja **[tehty]**
-* käyttäjän ajaessa projektin sovellus päivittää esikatselunäkymän automaattisesti **[tehty]**
+* käyttäjä voi muokata Latex-lähdekoodia
+* käyttäjä voi lisätä tai poistaa Latex-lähdekooditiedostoja
+* käyttäjän ajaessa projektin sovellus päivittää esikatselunäkymän automaattisesti
 
 ### Sovellusasetukset
 
-* käyttäjä voi luoda, muokata ja poistaa templateja joita käytetään uuden projektin alustuksessa **[tehty]**
-* käyttäjä voi määrittää projektien oletustallennuspaikan **[tehty]**
-* käyttäjä voi määrittää tietokannan sijainnin **[tehty]**
+* käyttäjä voi luoda, muokata ja poistaa malleja, joita käytetään uuden projektin alustuksessa
+* käyttäjä voi määrittää projektien oletustallennuspaikan
+* käyttäjä voi määrittää tietokannan sijainnin ja nimen
+* Teeman kustomointi: käyttäjä voi määrittää asetuksissa ulkoasun värit sekä fontin
 
 ## Jatkokehitysmahdollisuuksia
 
 * Paketinhallinta: käyttäjä voi ladata latex-paketteja sovelluksen kautta suoraan repositoryista ilman manuaalista asennusta
-* Teeman kustomointi: käyttäjä voi määrittää asetuksissa ulkoasun värit sekä fontin
 * Koodin väritys
-
