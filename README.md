@@ -1,4 +1,6 @@
-# texviper
+# Texviper
+
+Helsingin yliopiston ohjelmistotekniikan kurssilla harjoitustyönä laatimani Latex-editori.
 
 ## Dokumentaatio
 
